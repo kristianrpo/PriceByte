@@ -1,0 +1,49 @@
+{%extends 'base.html'%}
+{%load static%}
+{% block settings_head%}
+<link href = "{%static 'css/product/detail_product.css'%}" rel = "stylesheet"/>
+{%endblock settings_head%}
+{% block content%}
+{% include 'components/nav_bar.html' %}
+<br/>
+<div class = "small-container single-product">
+    <div class = "row">
+        <div class = "col-2">
+            {% for image in product.image_product.all|slice:":1"%}
+                <img src="{{ image.images_product.url }}" width ="100%" id="ProductImg"/>
+            {% endfor %}
+            <div class = "small-img-row">
+                {% for image in product.image_product.all%}
+                <div class = "small-img-col">
+                    <img src="{{ image.images_product.url }}" width ="100%" class="small-img"/>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<br/>
+{{product.name_product}}
+<br/>
+{% for category in product.categories_product.all %}
+    {{category}}
+{% endfor %}
+<br/>
+{{product.description_product}}
+<br/>
+{% for seller in product.distributed_by_product.all%}
+    {{seller}}
+{% endfor %}
+<br/>
+{{product.price_product}}
+<br/>
+{{product.quantity_product}}
+<br/>
+{{product.code_product}}
+<br/>
+<script src = "{%static 'js/product/images.js'%}">
+</script>
+{% endblock content%}
