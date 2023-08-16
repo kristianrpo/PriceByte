@@ -33,12 +33,10 @@
         <p class = "description">{{product.description_product}}</p>
             <h3 class = "stock">Stock: {{product.quantity_product}} items</h3>
             <h3 class = "info_seller">
-            {% for seller in product.distributed_by_product.all%}
-                <div>Name: {{seller.name_company_seller}}</div> 
-                <div>Cellphone: {{seller.phone_number_seller}}</div>
-                <div>Address: {{seller.address}}</div>
-                <div>Stall: {{seller.local_number_seller}}</div>  
-            {% endfor %}
+            <div>Name: {{product.distributed_by_product.name_company_seller}}</div> 
+            <div>Cellphone: {{product.distributed_by_product.phone_number_seller}}</div>
+            <div>Address: {{product.distributed_by_product.address}}</div>
+            <div>Stall: {{product.distributed_by_product.local_number_seller}}</div>
         </h3>
     </div>
 </div>
