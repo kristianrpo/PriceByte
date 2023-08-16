@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block settings_head %}
+<link href = "{%static 'css/components/navbar.css'%}" rel = "stylesheet"/>
+{% endblock settings_head %}
+{% block content %}
+<div class = "container">
+    <img src = "{%static 'img/navbar/pricebyte.png'%}"/>
+    <div class = "buttons_container">
+        <button type = "text">Log in</button>
+        <button type = "text">Sing up</button>
+        <button type = "text">About us</button>
+        <button type = "text">Products</button>
+    </div>
+</div>
+{% endblock content %}

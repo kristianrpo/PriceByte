@@ -3,3 +3,5 @@ Django==4.2.4
 sqlparse==0.4.4
 tzdata==2023.3 
 Unipath==1.1
+psycopg2==2.9.7
+Pillow==10.0.0
