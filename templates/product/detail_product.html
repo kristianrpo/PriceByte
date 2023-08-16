@@ -2,12 +2,13 @@
 {%load static%}
 {% block settings_head%}
 <link href = "{%static 'css/product/detail_product.css'%}" rel = "stylesheet"/>
+<title>Detail product</title>
 {%endblock settings_head%}
 {% block content%}
 {% include 'components/nav_bar.html' %}
 <br/>
-<div class = "small-container single-product">
-    <div class = "row">
+<div class = "general_container">
+    <div class = "single-product">
         <div class = "col-2">
             {% for image in product.image_product.all|slice:":1"%}
                 <img src="{{ image.images_product.url }}" width ="100%" id="ProductImg"/>
@@ -21,29 +22,26 @@
             </div>
         </div>
     </div>
+    <div class = "info_container">
+        <div class = "categories">
+            {% for category in product.categories_product.all %}
+                <p>{{category}}/</p>
+            {% endfor %}
+        </div>
+        <h1>{{product.name_product}}</h1>
+        <h2 class = "price">{{product.price_product}}</h2>
+        <p class = "description">{{product.description_product}}</p>
+            <h3 class = "stock">Stock: {{product.quantity_product}} items</h3>
+            <h3 class = "info_seller">
+            {% for seller in product.distributed_by_product.all%}
+                <div>Name: {{seller.name_company_seller}}</div> 
+                <div>Cellphone: {{seller.phone_number_seller}}</div>
+                <div>Address: {{seller.address}}</div>
+                <div>Stall: {{seller.local_number_seller}}</div>  
+            {% endfor %}
+        </h3>
+    </div>
 </div>
-
-
-
-<br/>
-{{product.name_product}}
-<br/>
-{% for category in product.categories_product.all %}
-    {{category}}
-{% endfor %}
-<br/>
-{{product.description_product}}
-<br/>
-{% for seller in product.distributed_by_product.all%}
-    {{seller}}
-{% endfor %}
-<br/>
-{{product.price_product}}
-<br/>
-{{product.quantity_product}}
-<br/>
-{{product.code_product}}
-<br/>
 <script src = "{%static 'js/product/images.js'%}">
 </script>
 {% endblock content%}

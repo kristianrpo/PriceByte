@@ -17,16 +17,16 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 1vw;
 }
 input {
     height: 8vh;
-    width: 350px;
-    padding: 0 20px;
+    width: 23vw;
+    padding: 0 1vw;
     color: #000;
-    border-radius: 50px;
-    font-size: 20px;
-    border: 1px solid #2c4a52;
+    border-radius: 5vw;
+    font-size: 1.3vw;
+    border: 0.1vw solid #2c4a52;
 }
 ::placeholder{
     color:grey;
@@ -39,6 +39,7 @@ input {
     font-size: 20px;
     border:none;
     width: 70px;
+    cursor: pointer;
 }
 .products_images {
     width: 30vw;
