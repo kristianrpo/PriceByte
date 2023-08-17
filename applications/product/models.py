@@ -13,7 +13,7 @@ class Product(models.Model):
     image_product = models.ManyToManyField(ImagesProduct)
     categories_product = models.ManyToManyField(Category)
     description_product =  models.TextField(("description_product"))
-    distributed_by_product = models.ManyToManyField(Seller)
+    distributed_by_product = models.ForeignKey(Seller, on_delete=models.CASCADE)
     price_product = models.IntegerField(("price_product"))
     quantity_product = models.IntegerField(("quantity_product"))
     code_product = models.CharField(("code_product"),max_length=20)
