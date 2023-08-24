@@ -9,12 +9,16 @@ class ViewProducts(ListView):
     context_object_name = "product"
     def get_queryset(self):
         searched_product = self.request.GET.get("product",'')
+        option = self.request.GET.get("option",'')
         list_products = Product.objects.filter(name_product__icontains = searched_product)
-        if len(list_products)>0 and len(searched_product)>0:
+        if option == "price":
+            list_products = list_products.order_by('price_product')
+        if len(list_products)>0:
             return list_products
         else:
             return []
         
+
 class DetailProduct(DetailView):
     model = Product
     template_name = "product/detail_product.html"

@@ -82,3 +82,15 @@ input {
 .button_details:hover{
     box-shadow: 0 0 5px #2c4a52,0 0 25px #2c4a52;
 }
+.filter_compare{
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin:20px;
+}
+.options{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
