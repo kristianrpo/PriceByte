@@ -11,8 +11,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pricebytedb',
-        'USER' : 'kristianrpo',
-        'PASSWORD' : 'Youtube30102004.',
+        'USER' : 'postgres',
+        'PASSWORD' : 'Katy7203*',
         'HOST' : 'localhost',
         'PORT' : '5432'
     }

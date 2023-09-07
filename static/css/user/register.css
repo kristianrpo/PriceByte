@@ -1,0 +1,29 @@
+/* Estilos para centrar el div */
+.centered-div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* Puedes añadir estilos adicionales según tus preferencias */
+.centered-div h1 {
+    font-size: 24px;
+}
+
+.centered-div form {
+    margin-top: 20px;
+}
+
+.centered-div button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.centered-div button:hover {
+    background-color: #0056b3;
+}

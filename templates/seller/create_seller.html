@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+{%load static%}
+{% block settings_head%}
+<link href = "{%static 'css/seller/create_seller.css'%}" rel = "stylesheet"/>
+<title>Crear vendedor</title>
+{%endblock settings_head%}
+{% block content%}
+{% include 'components/nav_bar.html' %}
+
+
+<div class="card mb-3">
+    <div class="row g-0">
+      <div>
+        <div class="card-body">
+          <h5 class="card-title">Crear nuevo vendedor</h5>
+          {% if error %}
+          <div class="alert alert-danger mt-3" role="alert">
+            {{ error }}
+          </div>
+          {% endif %}
+          <p class="card-text">
+            <form method="POST">
+                {% csrf_token %}
+                <label for="NIT_seller">NIT:</label>
+                <input type="text" name="NIT_seller" id="NIT_seller" required><br><br>
+                
+                <label for="phone_number_seller">Número de telefono:</label>
+                <input type="text" name="phone_number_seller" id="phone_number_seller" required><br><br>
+                
+                <label for="address">Direccion:</label>
+                <input type="text" name="address" id="address" required><br><br>
+                
+                <label for="local_number_seller">Numero del local:</label>
+                <input type="text" name="local_number_seller" id="local_number_seller" required><br><br>
+              <button  type="submit" class="btn btn-primary">
+                  Crear vendedor
+              </button>
+            </form>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+   
+{% endblock content%}
