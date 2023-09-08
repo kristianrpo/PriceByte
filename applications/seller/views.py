@@ -49,6 +49,13 @@ class UpdateProduct(UpdateView):
     success_message = "Successful creation"
     def form_valid(self, form):
         if self.request.method == 'POST':
+            delete_image_ids = self.request.POST.getlist('delete_images')
+            for image_id in delete_image_ids:
+                try:
+                    image = ImagesProduct.objects.get(id=image_id)
+                    image.delete()
+                except ImagesProduct.DoesNotExist:
+                    pass
             object = form.save(commit=False)
             object.distributed_by_product = Seller.objects.get(pk=1)
             object.save()

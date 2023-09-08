@@ -117,3 +117,17 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+.custom-file-input {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgba(44, 74, 82,0.2);
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+input[type="file"] {
+    display: none; 
+}

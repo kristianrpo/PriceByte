@@ -1,16 +1,12 @@
-const customFileInput = document.querySelector('.custom-file-input');
-const fileInput = document.querySelector('#image_product');
-customFileInput.addEventListener('click', () => {
-    fileInput.click();
-});
+function updateUploadedImagesMessage(input) {
+    const messageElement = document.getElementById("uploaded-images-message");
+    const fileList = input.files;
+    const imageNames = Array.from(fileList).map(file => file.name);
+    messageElement.textContent = "Images selected: " + imageNames.join(", ");
+}
 
-fileInput.addEventListener('change', () => {
-    if (fileInput.files.length>1){
-        const fileName = fileInput.files[0].name;
-        customFileInput.textContent = fileName + "...";
-    }
-    else{
-        const fileName = fileInput.files[0].name;
-        customFileInput.textContent = fileName;
-    }
+
+const imageInput = document.getElementById("image_product");
+imageInput.addEventListener("change", function() {
+    updateUploadedImagesMessage(this);
 });

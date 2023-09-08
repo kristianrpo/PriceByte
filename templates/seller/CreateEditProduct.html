@@ -25,11 +25,19 @@
                 {% endfor %}
             </div>
         </div>
-        <div class = "image_container">
-            <label for="image_product">Product Image:</label>
-            <button class="custom-file-input">Upload photos</button>
-            <input type="file" id="image_product" name="image_product" accept="image/*" class = "hide" multiple>
+        <div class="image_container">
+            <label for="image_product" class="custom-file-input">Upload photos</label>
+            <input type="file" id="image_product" name="image_product" accept="image/*" style="display: none;" multiple>
         </div>
+        <div class = "image_container">
+            {% for image in object.image_product.all %}
+            <div class = "image-item">
+                <img src="{{ image.images_product.url }}" width="100">
+                <input type="checkbox" name="delete_images" value="{{image.id}}" class="delete-button"> Delete
+            </div>
+            {% endfor %}
+        </div>
+        <p id="uploaded-images-message"></p>
         <button type="submit" class = "button_details" >Confirm</button>
     </form>
 </div>
