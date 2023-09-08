@@ -25,7 +25,6 @@
     </div>
     <form method = "GET" action = "{% url 'product_app:view_all_products'%}">
         <input type = "text" value = "{{searched_product}}" class = "hide_options" name = "product"/>
-        {{searched_product}}
         <select name = "option" class = "hide_options">
             <option value = "{{search_by}}"></option>
         </select>

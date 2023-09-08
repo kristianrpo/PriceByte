@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{%load static%}
+{% block settings_head%}
+<title>Add product</title>
+<link href = "{%static 'css/seller/CreateProduct.css'%}" rel = "stylesheet"/>
+{%endblock settings_head%}
+{% block content%}
+<div class = "general_container">
+    <form method = "POST" enctype="multipart/form-data"> {% csrf_token %}
+        {{ form.name_product.label_tag }} {{ form.name_product }}
+        {{ form.description_product.label_tag }} {{ form.description_product }}
+        {{ form.price_product.label_tag }} {{ form.price_product }}
+        {{ form.quantity_product.label_tag }} {{ form.quantity_product }}
+        {{ form.code_product.label_tag }} {{ form.code_product }}
+        <div id="categories-box">
+            <label for="categories">Categories:</label>
+            <div id="categories">
+                {% for category in form.categories_product %}
+                    <label>
+                        {{ category }}
+                        {% if forloop.counter|divisibleby:2 %}
+                            </label><br>
+                        {% endif %}
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+        <div class = "image_container">
+            <label for="image_product">Product Image:</label>
+            <button class="custom-file-input">Upload photos</button>
+            <input type="file" id="image_product" name="image_product" accept="image/*" class = "hide" multiple>
+        </div>
+        <button type="submit" class = "button_details" >Confirm</button>
+    </form>
+</div>
+<script src = "{% static 'js/seller/upload_files.js'%}">
+</script>
+{% endblock content%}
