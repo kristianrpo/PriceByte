@@ -1,4 +1,5 @@
 from django import forms
+from .models import Seller
 from applications.product.models import Product
 
 class FormCreateProduct(forms.ModelForm):

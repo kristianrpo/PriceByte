@@ -1,0 +1,65 @@
+/* Establecer una imagen de fondo */
+body {
+   background-size: cover; /* Para ajustar la imagen de fondo al tamaño de la ventana */
+    background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
+    background-attachment: fixed; /* Fija la imagen de fondo en su lugar mientras se desplaza */
+}
+
+/* Estilos para centrar el formulario */
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Estilos para centrar horizontal y verticalmente */
+.form-container {
+    background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.es%2Ffotos-vectores-gratis%2Flineas-minimalistas&psig=AOvVaw0Gzy2f1ywjw6UEJkYPePwi&ust=1694015910539000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCNjsvMLyk4EDFQAAAAAdAAAAABAI');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Esto centra verticalmente el contenido */
+}
+
+/* Estilos para el formulario */
+form {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente para que la imagen de fondo sea visible */
+}
+
+/* Estilos para el navbar en la parte superior */
+.navbar {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 20px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
