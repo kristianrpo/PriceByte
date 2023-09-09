@@ -11,12 +11,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pricebytedb',
-        'USER' : 'postgres',
-        'PASSWORD' : 'Katy7203*',
+        'USER' : 'kristianrpo',
+        'PASSWORD' : 'Youtube30102004.',
         'HOST' : 'localhost',
         'PORT' : '5432'
     }
 }
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
