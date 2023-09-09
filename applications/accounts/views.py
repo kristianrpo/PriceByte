@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.db import IntegrityError
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from applications.seller.views import create_seller
+from applications.seller.views import *
 
 def home(request):
     return render(request, 'home.html')
@@ -26,7 +26,7 @@ def signupaccount(request):
                 user.save()
                 login(request, user)
                 if(user.type== 'vendedor'):
-                    return redirect('create_seller', username=user.username, email=user.email)
+                    return redirect('seller_app:create_seller', username=user.username, email=user.email)
                 else:
                     print("NO HOLA")
                 return redirect('home')
