@@ -43,7 +43,7 @@ def logoutaccount(request):
     logout(request)
     return redirect('home')
 
-def loginaccount(request):    
+def loginaccount(request):
     if request.method == 'GET':
         return render(request, 'accounts/loginaccount.html', 
                       {'form':AuthenticationForm})            
