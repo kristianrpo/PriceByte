@@ -57,3 +57,31 @@
 .stock{
     margin-top: 1vw;
 }
+
+.container .buttons_container {
+    display: flex;
+    justify-content: flex-end; 
+    width: 100%;
+    
+}
+
+
+.container .buttons_container > a {
+    border: none;
+    box-shadow: 0px 1vh 0.8vw rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    border-radius: 1vw;
+    margin: 0vw 0.5vw;
+    padding: 0vw;
+    font-size: 1.1vw;
+    text-decoration: none;
+    color: black;
+
+}
+
+
+.container .buttons_container > a:hover {
+    background-color: #8e9b97;
+    cursor: pointer;
+
+}

@@ -1,15 +1,17 @@
+# forms.py
 from django import forms
 
-class RatingForm(forms.Form):
-    WARRANTY_CHOICES = (
-        (1, '1 estrella'),
-        (2, '2 estrellas'),
-        (3, '3 estrellas'),
-        (4, '4 estrellas'),
-        (5, '5 estrellas'),
+class ProductRating(forms.Form):
+    price_rating = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
+        label='Precio'
     )
-
-    warranty_rating = forms.ChoiceField(choices=WARRANTY_CHOICES, label='Calificación de garantía', widget=forms.HiddenInput())
-    price_rating = forms.ChoiceField(choices=WARRANTY_CHOICES, label='Calificación de precio', widget=forms.HiddenInput())
-    quality_rating = forms.ChoiceField(choices=WARRANTY_CHOICES, label='Calificación de calidad', widget=forms.HiddenInput())
-    overall_rating = forms.IntegerField(label='Calificación general')
+    quality_rating = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
+        label='Calidad'
+    )
+    warranty_rating = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
+        label='Garantía'
+    )
+    description = forms.CharField(max_length=500)

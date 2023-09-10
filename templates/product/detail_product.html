@@ -7,6 +7,7 @@
 {% block content%}
 {% include 'components/nav_bar.html' %}
 <br/>
+
 <div class = "general_container">
     <div class = "single-product">
         <div class = "col-2">
@@ -42,7 +43,10 @@
 </div>
 
 <div class = "comments">
-    
+    <div class = "buttons_container">
+        <a href="{% url 'AddReviewView' pk=product.pk %}">Comentar producto</a>
+
+    </div>
 </div>
 <script src = "{%static 'js/product/images.js'%}">
 </script>

@@ -28,8 +28,7 @@ def signupaccount(request):
                 if(user.type== 'vendedor'):
                     return redirect('seller_app:create_seller', username=user.username, email=user.email)
                 else:
-                    print("NO HOLA")
-                return redirect('home')
+                    return redirect('product_app:search_product')
             except IntegrityError:
                 return render(request, 'accounts/signupaccount.html', 
                  {'form':UserCreateForm,
@@ -41,7 +40,7 @@ def signupaccount(request):
 @login_required
 def logoutaccount(request):        
     logout(request)
-    return redirect('home')
+    return redirect('product_app:search_product')
 
 def loginaccount(request):
     if request.method == 'GET':
@@ -56,4 +55,7 @@ def loginaccount(request):
                     'error': 'username and password do not match'})
         else: 
             login(request,user)
-            return redirect('home')
+            if(user.type  == 'vendedor'):
+                return redirect('seller_app:home_seller')
+            else:
+                return redirect('product_app:search_product')

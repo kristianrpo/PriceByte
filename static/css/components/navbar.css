@@ -1,37 +1,53 @@
-*{
-    margin:0;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Reset de estilos y definición de fuentes */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.container{
+
+/* Estilos para el contenedor principal */
+.container {
     background-color: rgba(255, 255, 255, 0.5);
     width: 100%;
-    position:fixed;
+    position: fixed;
     display: flex;
     align-items: center;
+    /* Agregar otros estilos según sea necesario */
 }
-.container img{
+
+/* Estilos para la imagen dentro del contenedor */
+.container img {
     width: 13%;
-    margin:1vw;
+    margin: 1vw;
     display: inline;
+    /* Agregar otros estilos según sea necesario */
 }
-.container .buttons_container{
+
+/* Estilos para el contenedor de botones */
+.container .buttons_container {
     display: flex;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
     width: 100%;
-    justify-content: right;
+    /* Agregar otros estilos según sea necesario */
 }
-.container .buttons_container>a{
-    border:none;
+
+/* Estilos para los botones */
+.container .buttons_container > a {
+    border: none;
     box-shadow: 0px 1vh 0.8vw rgba(0, 0, 0, 0.1);
     background-color: transparent;
     border-radius: 1vw;
-    margin:0vw 1vw;
-    padding:1vw;
+    margin: 0vw 0.5vw; /* Agrega espacio entre los botones */
+    padding: 0vw;
     font-size: 1.1vw;
     text-decoration: none;
-    color:black
-
+    color: black;
+    /* Agregar otros estilos según sea necesario */
 }
-.container .buttons_container>a:hover{
+
+/* Estilos para el estado hover de los botones */
+.container .buttons_container > a:hover {
     background-color: #8e9b97;
-    cursor:pointer;
+    cursor: pointer;
+    /* Agregar otros estilos según sea necesario */
 }

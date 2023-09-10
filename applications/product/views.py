@@ -2,14 +2,16 @@ from typing import Any, Dict
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView,TemplateView
+from django.shortcuts import render, get_object_or_404
 from .models import Product
 class SearchProducts(TemplateView):
     template_name = "product/search_product.html"
 
-class DetailProduct(DetailView):
-    model = Product
-    template_name = "product/detail_product.html"
-    context_object_name = "product"
+
+def detail_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'product/detail_product.html', {'product': product})
+
 
 class ViewProducts(ListView):
     model = Product
