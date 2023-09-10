@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block settings_head %}
-<title>All products</title>
-<link rel = stylesheet href = "{%static 'css/product/view_all_products.css'%}"/>
+<title>Todos los productos</title>
+<link rel = "stylesheet" href = "{%static 'css/product/view_all_products.css'%}"/>
 {% endblock settings_head %}
 {%block content%}
 {% include 'components/nav_bar.html' %}
 <div class = "global_container">
     <div class = "title">
-        <h1>ALL PRODUCTS BY <span>{{search_by}}</span></h1>
+        <h1> TODOS LOS PRODUCTOS POR <span>{{search_by}}</span></h1>
     </div>
     <div class="container__images">
         {% for each_product in product%}
@@ -17,7 +17,7 @@
                     <div class="product_image" id = "button_general">
                         <img src="{{ image.images_product.url }}" class="products_images" />
                         <h1>{{each_product.name_product}}</h1><p class = "price">{{each_product.price_product}}</p>
-                        <a href = "{%url 'product_app:detail_product' each_product.id%}" class = "button_details">Details</a>
+                        <a href = "{%url 'product_app:detail_product' each_product.id%}" class = "button_details">Detalles</a>
                     </div>
                 {% endfor %}
             </div>

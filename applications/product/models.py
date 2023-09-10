@@ -9,13 +9,13 @@ class Category(models.Model):
     def __str__(self):
         return str(self.name_category)
 class Product(models.Model):
-    name_product = models.CharField(("Product name"), max_length=40)
+    name_product = models.CharField(("Nombre"), max_length=40)
     image_product = models.ManyToManyField(ImagesProduct)
     categories_product = models.ManyToManyField(Category)
-    description_product =  models.TextField(("Product description"))
+    description_product =  models.TextField(("Descripción"))
     distributed_by_product = models.ForeignKey(Seller, on_delete=models.CASCADE)
-    price_product = models.IntegerField(("Price"))
-    quantity_product = models.IntegerField(("Quantity"))
-    code_product = models.CharField(("Code"),max_length=20)
+    price_product = models.IntegerField(("Precio"))
+    quantity_product = models.IntegerField(("Cantidad"))
+    code_product = models.CharField(("Código"),max_length=20)
     def __str__(self):
         return str(self.name_product)

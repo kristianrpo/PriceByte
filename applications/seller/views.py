@@ -45,12 +45,12 @@ class CreateProduct(SuccessMessageMixin,CreateView):
                 object.image_product.add(instance)
             return super().form_valid(form)
 
-class UpdateProduct(UpdateView):
+class UpdateProduct(SuccessMessageMixin,UpdateView):
     model = Product
     form_class = FormCreateProduct
     template_name = "seller/CreateEditProduct.html"
     success_url = reverse_lazy('seller_app:home_seller')
-    success_message = "Successful creation"
+    success_message = "Successful modification"
     def form_valid(self, form):
         if self.request.method == 'POST':
             delete_image_ids = self.request.POST.getlist('delete_images')

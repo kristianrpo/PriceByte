@@ -1,17 +1,17 @@
 {%extends 'base.html'%}
 {%load static%}
 {% block settings_head%}
-<title>Delete product</title>
+<title>Eliminar producto</title>
 <link href = "{%static 'css/seller/DeleteProduct.css'%}" rel = "stylesheet"/>
 {%endblock settings_head%}
 {% block content%}
 <div class = "general_container">
-    <h1> Do you want to remove the product: "{{object}}" ? </h1>
+    <h1> ¿Desea eliminar el producto: "{{object}}"? </h1>
     <div class = "buttons">
         <form method="post">{% csrf_token %}
-            <button type="submit">Delete</button>
+            <button type="submit">Eliminar</button>
         </form>
-        <a href="{% url 'seller_app:home_seller' %}" class = "button">Cancel</a>
+        <a href="{% url 'seller_app:home_seller' %}" class = "button">Cancelar</a>
     </div>
 </div>
 {% endblock content%}

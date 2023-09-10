@@ -1,7 +1,7 @@
 {%extends 'base.html'%}
 {%load static%}
 {% block settings_head%}
-<title>Home Seller</title>
+<title>Home vendedor</title>
 <link href = "{%static 'css/seller/HomeSeller.css'%}" rel = "stylesheet"/>
 {%endblock settings_head%}
 {% block content%}
@@ -9,12 +9,12 @@
 <br/>
 <div class = "global_container">
     <div class = "title">
-        <h1>YOUR PRODUCTS</h1>
+        <h1>TUS PRODUCTOS</h1>
     </div>
     
     <div class = "search">
         <form method = "GET">
-            <input type = "text" class = "search_box" placeholder = "Search product" id = "product" name = "product">
+            <input type = "text" class = "search_box" placeholder = "Buscar producto" id = "product" name = "product">
             <input type = "submit"/ value = "🔍︎" class = "button_search">
         </form>
     </div>
@@ -34,8 +34,8 @@
                         <h1>{{each_product.name_product}}</h1><p class = "price">{{each_product.price_product}}</p>
                     </div>
                     <div>
-                        <a href = "{%url 'seller_app:delete_product' each_product.id%}" class = "button_details">Delete</a>
-                        <a href = "{%url 'seller_app:update_product' each_product.id%}" class = "button_details">Modify</a>
+                        <a href = "{%url 'seller_app:delete_product' each_product.id%}" class = "button_details">Eliminar</a>
+                        <a href = "{%url 'seller_app:update_product' each_product.id%}" class = "button_details">Modificar</a>
                     </div>
                 {% endfor %}
             </div>
@@ -75,6 +75,6 @@
         </ul>
     </div>
     <br/>
-    <a href = "{% url 'seller_app:create_product'%}" class = "button_details">Create product</a>
+    <a href = "{% url 'seller_app:create_product'%}" class = "button_details">Crear producto</a>
 </div>
 {% endblock content%}

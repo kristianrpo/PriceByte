@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block settings_head %}
-<title>Products</title>
+<title>Productos</title>
 <link rel = stylesheet href = "{%static 'css/product/search_box.css'%}"/>
 {% endblock settings_head %}
 {%block content%}
 {% include 'components/nav_bar.html' %}
 <div class = "general_search_container">
-    <h1>What product are you looking for?</h1>
+    <h1>¿Que producto está buscando?</h1>
     <form method = "GET" action = "{%url 'product_app:view_product'%}">
         <div class = "search_container">
-            <input type = "text" placeholder = "Search" name = "product" id = "product"/>
+            <input type = "text" placeholder = "Buscar" name = "product" id = "product"/>
             <button type = "submit" name = "button_product" id = "button_product" class = "button_search">🔍︎</button>
         </div>
         <div class = "options">
-            <label><p>I want to compare by: </p></label>
+            <label><p>¿Por cuál parámetro busca el producto?</p></label>
             <select class = "filter_compare" name = "option">
-                <option name = "price" id = "price" value = "price">Price</option>
+                <option name = "price" id = "price" value = "precio">Precio</option>
+                <option name = "rating" id = "rating" value = "valoración">Valoración</option>
             </select>
         </div>
     </form>

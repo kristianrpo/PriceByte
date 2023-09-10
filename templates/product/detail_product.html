@@ -2,12 +2,11 @@
 {%load static%}
 {% block settings_head%}
 <link href = "{%static 'css/product/detail_product.css'%}" rel = "stylesheet"/>
-<title>Detail product</title>
+<title>Detalles del producto</title>
 {%endblock settings_head%}
 {% block content%}
 {% include 'components/nav_bar.html' %}
 <br/>
-
 <div class = "general_container">
     <div class = "single-product">
         <div class = "col-2">
@@ -32,20 +31,19 @@
         <h1>{{product.name_product}}</h1>
         <h2 class = "price">{{product.price_product}}</h2>
         <p class = "description">{{product.description_product}}</p>
-            <h3 class = "stock">Stock: {{product.quantity_product}} items</h3>
+            <h3 class = "stock">Cantidad disponible: {{product.quantity_product}}</h3>
             <h3 class = "info_seller">
-            <div>Name: {{product.distributed_by_product.name_company_seller}}</div> 
-            <div>Cellphone: {{product.distributed_by_product.phone_number_seller}}</div>
-            <div>Address: {{product.distributed_by_product.address}}</div>
-            <div>Stall: {{product.distributed_by_product.local_number_seller}}</div>
+            <div>Nombre: {{product.distributed_by_product.name_company_seller}}</div> 
+            <div>Celular: {{product.distributed_by_product.phone_number_seller}}</div>
+            <div>Dirección: {{product.distributed_by_product.address}}</div>
+            <div>Local: {{product.distributed_by_product.local_number_seller}}</div>
         </h3>
     </div>
 </div>
 
 <div class = "comments">
     <div class = "buttons_container">
-        <a href="{% url 'AddReviewView' pk=product.pk %}">Comentar producto</a>
-
+        <a href="{% url 'review_app:AddReviewView' product.id%}">Comentar producto</a>
     </div>
 </div>
 <script src = "{%static 'js/product/images.js'%}">

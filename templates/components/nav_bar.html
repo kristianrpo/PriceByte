@@ -9,19 +9,12 @@
     <img src = "{%static 'img/navbar/pricebyte.png'%}"/>
     <div class = "buttons_container">
         <a href = "{%url 'product_app:search_product'%}">Productos</a>
-    </div>
-
-    
-        {% if user.is_authenticated %}
-          <a class="nav-link" href="{% url 'logoutaccount' %}">Logout ({{ user.username }} / {{ user.type }})</a>
-        {% else %}
-        <div class = "buttons_container">
-            <a href = "{% url 'loginaccount' %}">Login</a>
-        </div>
-        <div class = "buttons_container">
-            <a href = "{% url 'signupaccount' %}">Registrarse</a>
-        </div>
+    {% if user.is_authenticated %}
+        <a class="nav-link" href="{% url 'logoutaccount' %}">Logout ({{ user.username }} / {{ user.type }})</a>
+    {% else %}
+        <a href = "{% url 'loginaccount' %}">Iniciar Sesión</a>
+        <a href = "{% url 'signupaccount' %}">Registrarse</a>
         {% endif %}
-
-  </div>
+    </div>
+</div>
 {% endblock content %}
