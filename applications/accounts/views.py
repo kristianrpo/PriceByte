@@ -13,9 +13,9 @@ def home(request):
 
 def signupaccount(request):
     if request.method == 'GET':
-        print(18)
+        form = UserCreateForm()
         return render(request, 'accounts/signupaccount.html', 
-                      {'form':UserCreateForm})            
+                      {'form':form})            
     else:
         if request.POST['password1'] == request.POST['password2']:
             try:

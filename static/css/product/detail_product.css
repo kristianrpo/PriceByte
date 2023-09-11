@@ -57,31 +57,38 @@
 .stock{
     margin-top: 1vw;
 }
-
-.container .buttons_container {
-    display: flex;
-    justify-content: flex-end; 
-    width: 100%;
-    
-}
-
-
-.container .buttons_container > a {
-    border: none;
-    box-shadow: 0px 1vh 0.8vw rgba(0, 0, 0, 0.1);
-    background-color: transparent;
-    border-radius: 1vw;
-    margin: 0vw 0.5vw;
-    padding: 0vw;
-    font-size: 1.1vw;
+.button_details {
+    box-shadow: 0 0 5px #537072;
+    color: white;
+    background-color: #537072;
     text-decoration: none;
-    color: black;
-
-}
-
-
-.container .buttons_container > a:hover {
-    background-color: #8e9b97;
+    font-size: 1.4vw;
+    padding: 10px;
+    border-radius: 5    px;
+    margin: 1vw;
+    border: none;
     cursor: pointer;
+  }
+  
+  .button_details:hover {
+    box-shadow: 0 0 5px #2c4a52, 0 0 25px #2c4a52;
+  }
+  
 
-}
+
+  .button a.review-button {
+    background-color: #537072;
+    color: white;
+    text-decoration: none;
+    font-size: 1.4vw;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 1vw;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .button a.review-button:hover {
+    box-shadow: 0 0 5px #2c4a52, 0 0 25px #2c4a52;
+  }
+  

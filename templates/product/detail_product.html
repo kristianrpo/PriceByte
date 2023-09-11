@@ -38,14 +38,16 @@
             <div>Dirección: {{product.distributed_by_product.address}}</div>
             <div>Local: {{product.distributed_by_product.local_number_seller}}</div>
         </h3>
+    </br>
+        <div class="button">
+            <form method="GET" action="{% url 'review_app:AddReviewView' product.id %}">
+              <button type="submit" class="button_details review-button" id="open-review-modal">Comentar producto</button>
+            </form>
+          </div>
     </div>
+    
 </div>
 
-<div class = "comments">
-    <div class = "buttons_container">
-        <a href="{% url 'review_app:AddReviewView' product.id%}">Comentar producto</a>
-    </div>
-</div>
 <script src = "{%static 'js/product/images.js'%}">
 </script>
 {% endblock content%}

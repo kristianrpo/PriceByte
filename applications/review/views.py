@@ -6,12 +6,12 @@ from applications.product.models import Product
 from .forms import ProductRatingForm
 from applications.accounts.views import loginaccount
 
-@login_required(login_url= loginaccount) 
+@login_required(login_url=loginaccount) 
 def AddReviewView(request, pk):
     product = get_object_or_404(Product, pk=pk)
     
     if request.method == 'POST':
-        form =ProductRatingForm(request.POST) 
+        form = ProductRatingForm(request.POST) 
 
         if form.is_valid():
             username = request.user
@@ -26,12 +26,12 @@ def AddReviewView(request, pk):
                 quality_rating=quality_rating,
                 warranty_rating=warranty_rating,
                 description=description,
-                username = username
+                username=username
             )
 
             return redirect('product_app:detail_product', pk=pk)
     else:
-        form =ProductRating()
+        form = ProductRatingForm()  # Inicializa el formulario sin datos del modelo
 
     context = {'product': product, 'form': form}
     return render(request, 'review/create_review.html', context)
