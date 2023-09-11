@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block settings_head %}
+<title>Productos NLP</title>
+<link rel = stylesheet href = "{%static 'css/product/search_box.css'%}"/>
+{% endblock settings_head %}
+{%block content%}
+{% include 'components/nav_bar.html' %}
+<div class = "general_search_container">
+    <h1>Describe tu producto</h1>
+    <form method = "POST" action = "{%url 'product_app:view_product_nlp'%}">{% csrf_token %}
+        <div class = "search_container">
+            <input type = "text" placeholder = "Buscar" name = "product" id = "product"/>
+            <button type = "submit" name = "button_product" id = "button_product" class = "button_search">🔍︎</button>
+        </div>
+    </form>
+</div>
+{%endblock content%}

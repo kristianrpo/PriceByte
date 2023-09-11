@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block settings_head %}
+<title>Top productos</title>
+<link rel = stylesheet href = "{%static 'css/product/view_products.css'%}"/>
+{% endblock settings_head %}
+{%block content%}
+{% include 'components/nav_bar.html' %}
+<div class = "global_container">
+    <div class = "title">
+        <h1>MEJORES PRODUCTOS POR <span>{{search_by}}</span></h1>
+    </div>
+    <div class="container__images">
+        {% for each_product in top_3_productos %}
+            <div class="product_item">
+                {% for image in each_product.image_product.all|slice:":1" %}
+                    <div class="product_image" id = "button_general">
+                        <img src="{{ image.images_product.url }}" class="products_images" />
+                        <h1>{{each_product.name_product}}</h1><p class = "price">{{each_product.price_product}}</p>
+                        <a href = "{%url 'product_app:detail_product' each_product.id%}" class = "button_details">Detalles</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <form method = "GET" action = "{% url 'product_app:view_all_products'%}">
+        <input type = "text" value = "{{searched_product}}" class = "hide_options" name = "product"/>
+        <select name = "option" class = "hide_options">
+            <option value = "{{search_by}}"></option>
+        </select>
+        <div class = "container_see_all_products" id = "all">
+            <button type = "submit" class = "all_products">Ver más</button>
+        </div>
+    </form>
+</div>
+{%endblock content%}
