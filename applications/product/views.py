@@ -84,7 +84,7 @@ def Search_products_NLP(request):
     search_by = "Descripción"
     # Si el formulario se envió, recupera la descripción del usuario
     if request.method == 'POST':
-        descripcion_usuario = request.POST.get('descripcion_usuario', '')
+        descripcion_usuario = request.POST.get('product', '')
         descripcion_usuario = str(descripcion_usuario.lower())
         
         # Procesa la descripción del usuario
