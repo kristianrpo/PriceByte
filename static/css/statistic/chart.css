@@ -1,0 +1,22 @@
+.title{
+    text-align: center;
+    padding-top: 6vw;
+    margin-bottom: 1vw;
+    margin: 0 0 1vw 0;
+}
+
+
+.title h1{
+    font-size: 3vw;
+    color:#2c4a52;
+    text-decoration: solid;
+    -webkit-text-stroke: 2px black;
+}
+
+.global_container{
+    margin: 0 10vw 2vw 10vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
