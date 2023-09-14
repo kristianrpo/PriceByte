@@ -7,12 +7,6 @@
 {% block content%}
 {% include 'components/seller_nav_bar.html' %}
 <div class = "general_container">
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <form method = "POST" enctype="multipart/form-data"> {% csrf_token %}
         {{ form.name_product.label_tag }} {{ form.name_product }}
         {{ form.description_product.label_tag }} {{ form.description_product }}

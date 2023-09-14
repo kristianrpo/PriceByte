@@ -26,13 +26,13 @@ class DeleteProduct(SuccessMessageMixin,DeleteView):
     model = Product
     template_name = "seller/DeleteProduct.html"
     success_url = reverse_lazy('seller_app:home_seller')
-    success_message = "Successful elimination"
+    success_message = "Eliminación exitosa"
 
 class CreateProduct(SuccessMessageMixin,CreateView):
     form_class = FormCreateProduct
     template_name = "seller/CreateEditProduct.html"
     success_url = reverse_lazy('seller_app:home_seller')
-    success_message = "Successful creation"
+    success_message = "Creación exitosa"
     def form_valid(self, form):
         if self.request.method == 'POST':
             seller_1 = self.request.user
@@ -50,7 +50,7 @@ class UpdateProduct(SuccessMessageMixin,UpdateView):
     form_class = FormCreateProduct
     template_name = "seller/CreateEditProduct.html"
     success_url = reverse_lazy('seller_app:home_seller')
-    success_message = "Successful modification"
+    success_message = "Modificación exitosa"
     def form_valid(self, form):
         if self.request.method == 'POST':
             delete_image_ids = self.request.POST.getlist('delete_images')

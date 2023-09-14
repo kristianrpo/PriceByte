@@ -56,7 +56,7 @@ class ViewAllProducts(ListView):
     model = Product
     template_name = "product/view_all_products.html"
     context_object_name = "product"
-    paginate_by = 1
+    paginate_by = 4
     def get_queryset(self):
         searched_product = self.request.GET.get("product",'')
         option = self.request.GET.get("option",'')
