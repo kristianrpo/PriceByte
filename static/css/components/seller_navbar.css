@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0; /* Agrega padding: 0; para evitar relleno predeterminado */
+}
+
+/* Estilos para el navbar */
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Alinea los elementos del navbar */
+    padding: 10px; /* Agrega espacio alrededor del contenido del navbar */
+}
+
+.container img {
+    width: 13%;
+    margin: 0 1vw; /* Ajusta el margen horizontal */
+    display: inline;
+}
+
+.container .buttons_container {
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+}
+
+.container .buttons_container > a {
+    border: none;
+    box-shadow: 0px 1vh 0.8vw rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    border-radius: 1vw;
+    margin: 0 1vw;
+    padding: 1vw;
+    font-size: 1.1vw;
+    text-decoration: none;
+    color: black;
+}
+
+.container .buttons_container > a:hover {
+    background-color: #8e9b97;
+    cursor: pointer;
+}
+
+.content {
+    margin-top: 150px; /* Ajusta la altura según la altura del navbar */
+    padding: 20px; /* Agrega espacio alrededor del contenido */
+}

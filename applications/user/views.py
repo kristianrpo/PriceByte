@@ -11,8 +11,7 @@ def create_client(request, username, email):
 
         client = client(email_client = email_client, Name = Name)
         client.save()
-        
-        # Redirige a donde desees después de crear al vendedor
+       
         return redirect('home')
     
     return render(request, 'seller/create_seller.html')
