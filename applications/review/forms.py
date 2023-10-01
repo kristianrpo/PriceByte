@@ -14,4 +14,4 @@ class ProductRatingForm(forms.Form):
         widget=forms.NumberInput(attrs={'type': 'range', 'min': '1', 'max': '5', 'step': '1'}),
         label='Garantía'
     )
-    description = forms.CharField(max_length=500)
+    description = forms.CharField(max_length=500, label = "Descripción")

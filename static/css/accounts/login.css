@@ -43,7 +43,7 @@
 }
 
 
-.general_container input[type="number"]:focus,
+.general_container input[type="password"]:focus,
 .general_container input[type="text"]:focus {
     background-color: white;
 }

@@ -20,7 +20,7 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 20px 30px 20px;
     box-shadow: 0px 10px 20px rgba(0,0,0,.2);
     margin: 10px;
     border-radius: 10px;
@@ -109,4 +109,7 @@ body{
 }
 .hide_options{
     display: none;
+}
+.container__images .product_item .product_image h1{
+    max-width: 16vw;
 }

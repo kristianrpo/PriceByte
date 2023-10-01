@@ -2,18 +2,19 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .single-product{
-    margin-top: 12vh;
-    width: 30vw;
+    margin: 12vh 5vw;
+    width: 25vw;
 }
 .small-img-row{
     display: flex;
     justify-content: space-around;
+    margin-top: 3vw;
 }
 .col-2 img{
     max-width: 100%;
 }
 .small-img-col{
-    flex-basis:24%;
+    flex-basis:21%;
     cursor: pointer;
 }
 .single-product .col-2 img{
@@ -22,6 +23,7 @@
 .general_container{
     display: flex;
     justify-content: center;
+    height: 90vh;
 }
 .general_container .info_container{
     margin-top:12vh;
@@ -91,4 +93,48 @@
   .button a.review-button:hover {
     box-shadow: 0 0 5px #2c4a52, 0 0 25px #2c4a52;
   }
-  
+  .title_comments{
+    text-align: center;
+    font-size: 5vw;
+    color:#2c4a52;
+    text-decoration: solid;
+    -webkit-text-stroke: 2px black;
+  }
+  .box_review .box{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px 30px 20px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,.2);
+    margin: 3vw 10vw 3vw 10vw;
+    border-radius: 10px;
+    max-width: 100%;
+  }
+
+  .box_review .box .top_card .item_review{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: fit-content;
+  }
+  .box_review .box .top_card .item_review label{
+    font-size: 1.3vw;
+    color:white;
+  }
+  .box_review .box .top_card .item_review p{
+    font-size: 1.3vw;
+    color:white;
+  }
+  .box_review .box .top_card{
+    display: flex;
+    justify-content: space-around;
+    background-color: #537072;
+    margin-bottom:2vw;
+  }
+  .box_review .box .top_card h3{
+    padding-top:1vw;
+  }
+  .box_review .box p{
+    font-size: 1.3vw;
+    text-align: center;
+  }

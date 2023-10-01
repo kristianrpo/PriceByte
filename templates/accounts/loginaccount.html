@@ -8,14 +8,13 @@
 {%endblock settings_head%}
 {% block content%}
 {% include 'components/nav_bar.html' %}
-</br>
 <div class = "general_container">
 </br>
-<h2 class="card-title centered-title">Login</h2></br>
+<h2 class="card-title centered-title">Iniciar sesión</h2></br>
     <form method = "POST" enctype="multipart/form-data"> {% csrf_token %}
-      {{ form.as_p }}
-
-        <button type="submit" class = "button_details" >Login</button>
+      <label>Nombre de usuario</label>{{ form.username }}
+      <label>Contraseña</label>{{ form.password }}
+        <button type="submit" class = "button_details" >Iniciar sesión</button>
     </form>
   </br></br>
 </div>

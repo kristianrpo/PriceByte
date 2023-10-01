@@ -45,7 +45,34 @@
             </form>
           </div>
     </div>
-    
+</div>
+<h1 class = "title_comments">COMENTARIOS</h1>
+<div class = "box_review">
+        {% for comment in comments%}
+            {% if comment.product.id == product.id%}
+            <div class = "box">
+                <div class = "top_card">
+                    <div class = "item_review">
+                        <b><label>Nombre de usuario</label></b>
+                        <p>{{comment.username}}</p>
+                    </div>
+                    <div class = "item_review">
+                        <b><label>Precio</label></b>
+                        <p>{{comment.price_rating}}</p>
+                    </div>
+                    <div class = "item_review">
+                        <b><label>Calidad</label></b>
+                        <p>{{comment.quality_rating}}</p>
+                    </div>
+                    <div class = "item_review">
+                        <b><label>Garantía</label></b>
+                        <p>{{comment.warranty_rating}}</p>
+                    </div>
+                </div>
+                <p>{{comment.description}}</p>
+            </div>
+            {% endif %}
+        {% endfor %}
 </div>
 
 <script src = "{%static 'js/product/images.js'%}">

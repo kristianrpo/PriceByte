@@ -134,6 +134,9 @@
   border-radius: 5px;
   font-size: 20px;
 }
-
+input[type="password"]:focus,
+input[type="text"]:focus {
+    background-color: white;
+}
 
 
