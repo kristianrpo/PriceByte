@@ -150,3 +150,6 @@ body{
     color:white;
     font-family: 1.3vw;
 }
+.container__images .product_item .product_image h1{
+    max-width: 12vw;
+}

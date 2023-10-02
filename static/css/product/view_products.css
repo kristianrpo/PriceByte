@@ -29,7 +29,7 @@ body{
     content: "$";
 }
 .price{
-    margin-bottom:20px;
+    margin-bottom:5px;
 }
 .price::after{
     content: " COL";
@@ -112,4 +112,7 @@ body{
 }
 .container__images .product_item .product_image h1{
     max-width: 16vw;
+}
+.rating{
+    margin-bottom:20px;
 }
