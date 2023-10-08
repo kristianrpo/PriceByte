@@ -27,12 +27,40 @@
     {% endif %}
     <div class="container__images">
         {% for each_product in products%}
-            <div class="product_item" id = "{{each_product}}">
+            <div class="product_item" id = "{{each_product}}" title = "Detalles del producto">
                 {% for image in each_product.image_product.all|slice:":1" %}
-                    <div class="product_image" id = "button_general" data-product-id="{{each_product.id}}">
-                        <img src="{{ image.images_product.url }}" class="products_images" />
-                        <h1>{{each_product.name_product}}</h1><p class = "price">{{each_product.price_product}}</p>
-                    </div>
+                    {% for average_element in average_products%}
+                        {%if average_element.id == each_product.id%}
+                            <div class="product_image" id = "button_general" data-product-id="{{each_product.id}}">
+                                <img src="{{ image.images_product.url }}" class="products_images" />
+                                <h1>{{each_product.name_product}}</h1>
+                                <p class = "price">{{each_product.price_product}}</p>
+                                <p class = "rating">
+                                    {{average_element.total_avg_rating}} 
+                                    {% if average_element.total_avg_rating >= 4.5 %}
+                                    ⭐ ⭐ ⭐ ⭐ ⭐
+                                    {%endif%}
+                                    {% if average_element.total_avg_rating >= 3.8 and average_element.total_avg_rating < 4.5%}
+                                    ⭐ ⭐ ⭐ ⭐
+                                    {%endif%}
+                                    {% if average_element.total_avg_rating >= 3 and average_element.total_avg_rating < 3.8%}
+                                    ⭐ ⭐ ⭐
+                                    {%endif%}
+                                    {%  if average_element.total_avg_rating >= 2  and average_element.total_avg_rating < 3%}
+                                    ⭐ ⭐
+                                    {%endif%}
+                                    {%  if average_element.total_avg_rating >= 0 and average_element.total_avg_rating < 2%}
+                                    ⭐
+                                    {%endif%}
+                                </p>
+                                {%if each_product.unread_notifications_count > 0%}
+                                <p class = "comments_notification">Comentarios sin leer: {{ each_product.unread_notifications_count }} 🔴</p>
+                                {%else%}
+                                <p class = "comments_notification">Comentarios sin leer: {{ each_product.unread_notifications_count }} 🟢</p>
+                                {%endif%}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                     <div>
                         <a href = "{%url 'seller_app:delete_product' each_product.id%}" class = "button_details">Eliminar</a>
                         <a href = "{%url 'seller_app:update_product' each_product.id%}" class = "button_details">Modificar</a>

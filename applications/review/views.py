@@ -5,7 +5,7 @@ from .models import ProductRating
 from applications.product.models import Product
 from .forms import ProductRatingForm
 from applications.accounts.views import loginaccount
-
+from applications.notification.models import Notification
 @login_required(login_url=loginaccount) 
 def AddReviewView(request, pk):
     product = get_object_or_404(Product, pk=pk)
@@ -28,10 +28,12 @@ def AddReviewView(request, pk):
                 description=description,
                 username=username
             )
-
+            seller = product.distributed_by_product
+            message = f"El usuario {username} ha comentado su producto: {product.name_product}"
+            Notification.objects.create(seller=seller, message=message)
             return redirect('product_app:detail_product', pk=pk)
     else:
-        form = ProductRatingForm()  # Inicializa el formulario sin datos del modelo
+        form = ProductRatingForm()  
 
     context = {'product': product, 'form': form}
     return render(request, 'review/create_review.html', context)

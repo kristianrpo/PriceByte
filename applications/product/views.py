@@ -7,9 +7,11 @@ from .models import Product
 from applications.review.models import ProductRating
 from django.db.models import Avg, F, Func, Value, IntegerField,DecimalField
 import spacy
+from applications.seller.models import Seller
+from applications.notification.models import Notification
 class SearchProducts(TemplateView):
     template_name = "product/search_product.html"
-
+    
 class SearchByNlp(TemplateView):
     template_name = "product/search_product_nlp.html"
 
@@ -19,8 +21,18 @@ class DetailProduct(DetailView):
     context_object_name = "product"
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
-        context['comments'] = ProductRating.objects.all()
+        if self.request.user.is_authenticated and Seller.objects.filter(name_company_seller__icontains = self.request.user):
+            seller_name = Seller.objects.get(name_company_seller = self.request.user)
+            notifications = Notification.objects.filter(
+                seller=seller_name,
+                message__icontains=self.object.name_product,
+                is_read=False
+            )
+            for notification in notifications:
+                notification.is_read = True
+                notification.save()
 
+        context['comments'] = ProductRating.objects.all()
         searched_product = self.request.GET.get("product",'')
         option = self.request.GET.get("option",'')
         list_products = Product.objects.filter(name_product__icontains = searched_product)
