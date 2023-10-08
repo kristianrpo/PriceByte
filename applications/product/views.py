@@ -20,6 +20,27 @@ class DetailProduct(DetailView):
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         context['comments'] = ProductRating.objects.all()
+
+        searched_product = self.request.GET.get("product",'')
+        option = self.request.GET.get("option",'')
+        list_products = Product.objects.filter(name_product__icontains = searched_product)
+        list_products = list_products.annotate(
+            avg_price_rating=Avg('productrating__price_rating'),
+            avg_quality_rating=Avg('productrating__quality_rating'),
+            avg_warranty_rating=Avg('productrating__warranty_rating')
+        )
+        list_products = list_products.annotate(
+            total_avg_rating=(F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
+        )
+        for product in list_products:
+            if product.avg_price_rating != None and product.avg_quality_rating != None and product.avg_warranty_rating != None:
+                product.avg_price_rating = round(product.avg_price_rating, 1)
+                product.avg_quality_rating = round(product.avg_quality_rating, 1)
+                product.avg_warranty_rating = round(product.avg_warranty_rating, 1)
+                product.total_avg_rating = round(product.total_avg_rating, 1)
+            else:
+                product.total_avg_rating = "Sin reseñas"
+        context["average_products"] = list_products
         return context
 
 class ViewProducts(ListView):
@@ -38,13 +59,28 @@ class ViewProducts(ListView):
             avg_price_rating=Avg('productrating__price_rating'),
             avg_quality_rating=Avg('productrating__quality_rating'),
             avg_warranty_rating=Avg('productrating__warranty_rating')
-        )
+            )
             list_products = list_products.annotate(
                 total_avg_rating=(F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
             )
-            for product in list_products:
-                print(f"Producto: {product.name_product}, Promedio: {product.total_avg_rating}")
             list_products = list_products.order_by('-total_avg_rating')
+        if option == "recomendación pricebyte":
+            weight_price = 0.5
+            weight_rating = 0.7
+            list_products = list_products.annotate(
+            avg_price_rating=Avg('productrating__price_rating'),
+            avg_quality_rating=Avg('productrating__quality_rating'),
+            avg_warranty_rating=Avg('productrating__warranty_rating')
+            )
+            list_products = list_products.annotate(
+                total_avg_rating=(F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
+            )
+            list_products = list_products.annotate(
+                recommendation_pricebyte = ((F('total_avg_rating'))*weight_rating)/(F('price_product')*weight_price)
+            )
+            for product in list_products:
+                print(f"Producto: {product.name_product}, Promedio: {product.recommendation_pricebyte}")
+            list_products = list_products.order_by('-recommendation_pricebyte')
         if len(list_products)>0:
             return list_products
         else:
@@ -94,13 +130,28 @@ class ViewAllProducts(ListView):
             avg_price_rating=Avg('productrating__price_rating'),
             avg_quality_rating=Avg('productrating__quality_rating'),
             avg_warranty_rating=Avg('productrating__warranty_rating')
-        )
+            )
             list_products = list_products.annotate(
                 total_avg_rating=(F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
             )
-            for product in list_products:
-                print(f"Producto: {product.name_product}, Promedio: {product.total_avg_rating}")
             list_products = list_products.order_by('-total_avg_rating')
+        if option == "recomendación pricebyte":
+            weight_price = 0.5
+            weight_rating = 0.7
+            list_products = list_products.annotate(
+            avg_price_rating=Avg('productrating__price_rating'),
+            avg_quality_rating=Avg('productrating__quality_rating'),
+            avg_warranty_rating=Avg('productrating__warranty_rating')
+            )
+            list_products = list_products.annotate(
+                total_avg_rating=(F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
+            )
+            list_products = list_products.annotate(
+                recommendation_pricebyte = ((F('total_avg_rating'))*weight_rating)/(F('price_product')*weight_price)
+            )
+            for product in list_products:
+                print(f"Producto: {product.name_product}, Promedio: {product.recommendation_pricebyte}")
+            list_products = list_products.order_by('-recommendation_pricebyte')
         if len(list_products)>0:
             return list_products
         else:
@@ -132,8 +183,6 @@ class ViewAllProducts(ListView):
                 product.total_avg_rating = round(product.total_avg_rating, 1)
             else:
                 product.total_avg_rating = "Sin reseñas"
-        for product in list_products:
-            print(f"Producto: {product.name_product}, Promedio: {product.total_avg_rating}")
         context["average_products"] = list_products
         return context
         

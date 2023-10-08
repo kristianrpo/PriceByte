@@ -28,6 +28,30 @@
                 <p>{{category}}/</p>
             {% endfor %}
         </div>
+        <div class = "rating_div">
+            {% for average_element in average_products%}
+                {%if average_element.id == product.id%}
+                    <p class = "rating">
+                        {{average_element.total_avg_rating}}
+                        {% if average_element.total_avg_rating >= 4.5 %}
+                        ⭐ ⭐ ⭐ ⭐ ⭐
+                        {%endif%}
+                        {% if average_element.total_avg_rating >= 3.8 and average_element.total_avg_rating < 4.5%}
+                        ⭐ ⭐ ⭐ ⭐
+                        {%endif%}
+                        {% if average_element.total_avg_rating >= 3 and average_element.total_avg_rating < 3.8%}
+                        ⭐ ⭐ ⭐
+                        {%endif%}
+                        {%  if average_element.total_avg_rating >= 2  and average_element.total_avg_rating < 3%}
+                        ⭐ ⭐
+                        {%endif%}
+                        {%  if average_element.total_avg_rating >= 0 and average_element.total_avg_rating < 2%}
+                        ⭐
+                        {%endif%}
+                    </p>
+                {% endif %}
+            {% endfor %}
+        </div>
         <h1>{{product.name_product}}</h1>
         <h2 class = "price">{{product.price_product}}</h2>
         <p class = "description">{{product.description_product}}</p>

@@ -138,3 +138,10 @@
     font-size: 1.3vw;
     text-align: center;
   }
+  .rating_div{
+    margin-top: 1vw;
+    font-size: 1.3vw;
+  }
+  .rating_div .rating{
+    color:#2c4a52
+  }
