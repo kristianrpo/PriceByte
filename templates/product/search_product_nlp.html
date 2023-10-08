@@ -10,7 +10,7 @@
     <h1>Describe tu producto</h1>
     <form method = "POST" action = "{%url 'product_app:view_product_nlp'%}">{% csrf_token %}
         <div class = "search_container">
-            <input type = "text" placeholder = "Buscar" name = "description" id = "product"/>
+            <input type = "text" placeholder = "Buscar" name = "description" id = "product"/ required>
             <button type = "submit" name = "button_product" id = "button_product" class = "button_search">🔍︎</button>
         </div>
     </form>

@@ -227,4 +227,26 @@ def Search_products_NLP(request):
         # Obtener los tres productos con mejor similitud
         top_3_productos = [producto[0] for producto in productos_ordenados[:3]]
         resto_productos = [producto[0] for producto in productos_ordenados[3:]]
-    return render(request, template_name, {'top_3_productos': top_3_productos, 'resto_productos': resto_productos, 'search_by': search_by})
+
+        ## rating
+        searched_product = request.GET.get("product",'')
+        option = request.GET.get("option",'')
+        list_products = Product.objects.filter(name_product__icontains = searched_product)
+        list_products = list_products.annotate(
+            avg_price_rating=Avg('productrating__price_rating'),
+            avg_quality_rating=Avg('productrating__quality_rating'),
+            avg_warranty_rating=Avg('productrating__warranty_rating')
+        )
+
+        list_products = list_products.annotate(
+            total_avg_rating= (F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
+        )
+        for product in list_products:
+            if product.avg_price_rating != None and product.avg_quality_rating != None and product.avg_warranty_rating != None:
+                product.avg_price_rating = round(product.avg_price_rating, 1)
+                product.avg_quality_rating = round(product.avg_quality_rating, 1)
+                product.avg_warranty_rating = round(product.avg_warranty_rating, 1)
+                product.total_avg_rating = round(product.total_avg_rating, 1)
+            else:
+                product.total_avg_rating = "Sin reseñas"
+    return render(request, template_name, {'top_3_productos': top_3_productos, 'resto_productos': resto_productos, 'search_by': search_by,'average_products':list_products})
