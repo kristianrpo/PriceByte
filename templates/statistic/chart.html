@@ -18,7 +18,7 @@
             font-size: 1.5vw;
             cursor: pointer;
             padding: 8px; 
-            margin-bottom: -8px; 
+            margin-bottom: 0px; 
             width: 100%;
             border: none;
             text-align: left;
@@ -41,7 +41,7 @@
             margin: 20px auto; 
             text-align: center;
             padding: 0 8px;
-            margin-top: -8px;
+            margin-top: 0px;
         }
 
         .chart img {
@@ -53,9 +53,10 @@
 {% endblock settings_head %}
 
 {% block content %}
-    {% include 'components/nav_bar.html' %}
+{% include 'components/nav_bar.html' with value_type="Si"%}
 
     </br></br></br></br>
+    <div class = "global_container">
     <h1>Estadísticas de tus productos</h1>
     <button class="collapsible">Productos por categoría</button>
     <div class="content">
@@ -71,6 +72,20 @@
         </div>
     </div>
 
+    <button class="collapsible">Calificaciones por garantía</button>
+    <div class="content">
+        <div class="chart">
+            <img src="data:image/png;base64,{{ charts_data.warranty_rating_chart_base64 }}" alt="Warranty Rating Chart">
+        </div>
+    </div>
+
+    <button class="collapsible">Calificaciones por calidad</button>
+    <div class="content">
+        <div class="chart">
+            <img src="data:image/png;base64,{{ charts_data.quality_rating_chart_base64 }}" alt="Quality Rating Chart">
+        </div>
+    </div>
+</div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const collapsibles = document.querySelectorAll('.collapsible');
@@ -97,9 +112,9 @@
                 content.addEventListener('click', function() {
                     this.classList.toggle('active');
                     if (this.classList.contains('active')) {
-                        this.style.marginTop = '-8px';
+                        this.style.marginTop = '0px';
                     } else {
-                        this.style.marginTop = '-8px';
+                        this.style.marginTop = '0px';
                     }
                 });
             });
