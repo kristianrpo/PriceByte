@@ -1,20 +1,112 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block settings_head %}
-<title>Bar Chart</title>
-<link rel = stylesheet href = "{%static 'css/statistic/chart.css'%}"/>
+    <title>Combined Charts</title>
+    <link rel="stylesheet" href="{% static 'css/statistic/chart.css' %}" />
+    <style>
+        
+        h1 {
+            font-size: 3vw;
+            color:#2c4a52;
+            text-decoration: solid;
+            -webkit-text-stroke: 2px black;
+            margin: 20px auto; 
+            text-align: center;
+        }
+        .collapsible {
+            font-size: 1.5vw;
+            cursor: pointer;
+            padding: 8px; 
+            margin-bottom: -8px; 
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            color:#2c4a52;
+            text-decoration: solid;
+            -webkit-text-stroke: 1px black;
+        }
+
+        .content {
+            padding: 0 8px 8px 8px; 
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+            width: 100%;
+            margin: -8px 0 0 -8px;
+        }
+
+        .chart {
+            margin: 20px auto; 
+            text-align: center;
+            padding: 0 8px;
+            margin-top: -8px;
+        }
+
+        .chart img {
+            border: none;
+            margin: 20px auto; 
+            text-align: center;
+        }
+    </style>
 {% endblock settings_head %}
-{%block content%}
-{% include 'components/nav_bar.html' with value_type=is_seller%}
 
-    <div class = title>
-        <h1 class="title">Productos por categoría</h1>
+{% block content %}
+    {% include 'components/nav_bar.html' %}
+
+    </br></br></br></br>
+    <h1>Estadísticas de tus productos</h1>
+    <button class="collapsible">Productos por categoría</button>
+    <div class="content">
+        <div class="chart">
+            <img src="data:image/png;base64,{{ charts_data.category_chart_base64 }}" alt="Category Chart">
+        </div>
     </div>
-    <div class="global_container">
-    </br>
-        <img src="data:image/png;base64,{{ image_base64 }}" alt="Bar Chart">
+
+    <button class="collapsible">Calificaciones por precio</button>
+    <div class="content">
+        <div class="chart">
+            <img src="data:image/png;base64,{{ charts_data.price_rating_chart_base64 }}" alt="Price Rating Chart">
+        </div>
     </div>
-    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const collapsibles = document.querySelectorAll('.collapsible');
+
+            collapsibles.forEach(function(collapsible) {
+                collapsible.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    if (content.style.display === 'block') {
+                        content.style.display = 'none';
+                    } else {
+                        content.style.display = 'block';
+                        
+                    }
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const contents = document.querySelectorAll('.content');
+            
+            contents.forEach(function(content) {
+  
+                content.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    if (this.classList.contains('active')) {
+                        this.style.marginTop = '-8px';
+                    } else {
+                        this.style.marginTop = '-8px';
+                    }
+                });
+            });
+        });
 
 
-{%endblock content%}
+
+
+    </script>
+{% endblock content %}
