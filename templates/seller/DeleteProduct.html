@@ -5,7 +5,7 @@
 <link href = "{%static 'css/seller/DeleteProduct.css'%}" rel = "stylesheet"/>
 {%endblock settings_head%}
 {% block content%}
-{% include 'components/seller_nav_bar.html' %}
+{% include 'components/nav_bar.html' with value_type=is_seller%}
 <div class = "general_container">
     <h1> ¿Desea eliminar el producto: "{{object}}"? </h1>
     <div class = "buttons">

@@ -5,7 +5,7 @@
 <link rel = stylesheet href = "{%static 'css/product/view_products.css'%}"/>
 {% endblock settings_head %}
 {%block content%}
-{% include 'components/nav_bar.html' %}
+{% include 'components/nav_bar.html' with value_type=is_seller%}
 <div class = "global_container">
     <div class = "title">
         <h1>MEJORES PRODUCTOS POR <span>{{search_by}}</span></h1>

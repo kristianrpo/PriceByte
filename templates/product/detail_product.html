@@ -5,7 +5,7 @@
 <title>Detalles del producto</title>
 {%endblock settings_head%}
 {% block content%}
-{% include 'components/nav_bar.html' %}
+{% include 'components/nav_bar.html' with value_type=is_seller%}
 <br/>
 <div class = "general_container">
     <div class = "single-product">

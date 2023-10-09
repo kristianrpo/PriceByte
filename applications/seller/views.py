@@ -64,12 +64,30 @@ class SellerView(SuccessMessageMixin,ListView):
             else:
                 product.total_avg_rating = "Sin reseñas"
         context["average_products"] = list_products
+
+        if hasattr(self.request.user, 'type'):
+            if self.request.user.type == "vendedor":
+                context['is_seller'] = "Si"
+            else:
+                context['is_seller'] = "No"
+        else:
+            context['is_seller'] = "No"
         return context
 class DeleteProduct(SuccessMessageMixin,DeleteView):
     model = Product
     template_name = "seller/DeleteProduct.html"
     success_url = reverse_lazy('seller_app:home_seller')
     success_message = "Eliminación exitosa"
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        if hasattr(self.request.user, 'type'):
+            if self.request.user.type == "vendedor":
+                context['is_seller'] = "Si"
+            else:
+                context['is_seller'] = "No"
+        else:
+            context['is_seller'] = "No"
+        return context
 
 class CreateProduct(SuccessMessageMixin,CreateView):
     form_class = FormCreateProduct
@@ -87,7 +105,17 @@ class CreateProduct(SuccessMessageMixin,CreateView):
                 instance = ImagesProduct.objects.create(images_product=image)
                 object.image_product.add(instance)
             return super().form_valid(form)
-
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        if hasattr(self.request.user, 'type'):
+            if self.request.user.type == "vendedor":
+                context['is_seller'] = "Si"
+            else:
+                context['is_seller'] = "No"
+        else:
+            context['is_seller'] = "No"
+        return context
+    
 class UpdateProduct(SuccessMessageMixin,UpdateView):
     model = Product
     form_class = FormCreateProduct
@@ -112,6 +140,16 @@ class UpdateProduct(SuccessMessageMixin,UpdateView):
                 instance = ImagesProduct.objects.create(images_product=image)
                 object.image_product.add(instance)
             return super().form_valid(form)
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        if hasattr(self.request.user, 'type'):
+            if self.request.user.type == "vendedor":
+                context['is_seller'] = "Si"
+            else:
+                context['is_seller'] = "No"
+        else:
+            context['is_seller'] = "No"
+        return context
 
 def create_seller(request, username, email):
     if request.method == 'POST':
@@ -124,4 +162,11 @@ def create_seller(request, username, email):
         seller = Seller(NIT_seller = NIT_seller, name_company_seller = name_company_seller, email_seller= email_seller,  phone_number_seller = phone_number_seller, address = address, local_number_seller = local_number_seller)
         seller.save()
         return redirect('seller_app:home_seller')
-    return render(request, 'seller/create_seller.html')
+    if hasattr(request.user, 'type'):
+        if request.user.type == "vendedor":
+            is_seller = "Si"
+        else:
+            is_seller = "No"
+    else:
+        is_seller = "No"
+    return render(request, 'seller/create_seller.html',{'is_seller':is_seller})

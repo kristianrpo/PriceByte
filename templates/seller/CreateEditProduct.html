@@ -5,7 +5,8 @@
 <link href = "{%static 'css/seller/CreateProduct.css'%}" rel = "stylesheet"/>
 {%endblock settings_head%}
 {% block content%}
-{% include 'components/seller_nav_bar.html' %}
+{% include 'components/nav_bar.html' with value_type=is_seller%}
+<br/>
 <div class = "general_container">
     <form method = "POST" enctype="multipart/form-data"> {% csrf_token %}
         {{ form.name_product.label_tag }} {{ form.name_product }}

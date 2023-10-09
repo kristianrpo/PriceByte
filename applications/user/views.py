@@ -13,5 +13,12 @@ def create_client(request, username, email):
         client.save()
        
         return redirect('home')
-    
-    return render(request, 'seller/create_seller.html')
+    if hasattr(request.user, 'type'):
+            if request.user.type == "vendedor":
+                is_seller = "Si"
+            else:
+                is_seller = "No"
+    else:
+        is_seller = "No"
+    context = {'is_seller':is_seller,}
+    return render(request, 'seller/create_seller.html',context)

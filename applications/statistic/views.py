@@ -50,10 +50,18 @@ def bar_chart(request, vendor_name):
         image_base64 = base64.b64encode(buffer.read()).decode()
         buffer.close()
 
+        if hasattr(request.user, 'type'):
+            if request.user.type == "vendedor":
+                is_seller = "Si"
+            else:
+                is_seller = "No"
+        else:
+            is_seller = "No"
         context = {
             'image_base64': image_base64,
             'vendor_name': vendor_name,
             'categories_list': categories_list,
+            'is_seller' : is_seller,
         }
         return render(request, 'statistic/chart.html', context)
     except Seller.DoesNotExist:

@@ -5,7 +5,7 @@
 <link href = "{%static 'css/seller/HomeSeller.css'%}" rel = "stylesheet"/>
 {%endblock settings_head%}
 {% block content%}
-{% include 'components/seller_nav_bar.html' %}
+{% include 'components/nav_bar.html' with value_type=is_seller%}
 
 <div class = "global_container">
     <div class = "title">

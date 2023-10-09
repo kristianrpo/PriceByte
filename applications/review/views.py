@@ -34,6 +34,12 @@ def AddReviewView(request, pk):
             return redirect('product_app:detail_product', pk=pk)
     else:
         form = ProductRatingForm()  
-
-    context = {'product': product, 'form': form}
+    if hasattr(request.user, 'type'):
+            if request.user.type == "vendedor":
+                is_seller = "Si"
+            else:
+                is_seller = "No"
+    else:
+        is_seller = "No"
+    context = {'product': product, 'form': form, 'is_seller':is_seller}
     return render(request, 'review/create_review.html', context)

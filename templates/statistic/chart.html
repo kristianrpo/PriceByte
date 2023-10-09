@@ -5,7 +5,7 @@
 <link rel = stylesheet href = "{%static 'css/statistic/chart.css'%}"/>
 {% endblock settings_head %}
 {%block content%}
-{% include 'components/seller_nav_bar.html' %}
+{% include 'components/nav_bar.html' with value_type=is_seller%}
 
     <div class = title>
         <h1 class="title">Productos por categoría</h1>

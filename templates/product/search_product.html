@@ -5,7 +5,7 @@
 <link rel = stylesheet href = "{%static 'css/product/search_box.css'%}"/>
 {% endblock settings_head %}
 {%block content%}
-{% include 'components/nav_bar.html' %}
+{% include 'components/nav_bar.html' with value_type=is_seller%}
 <div class = "general_search_container">
     <h1>¿Qué producto está buscando?</h1>
     <form method = "GET" action = "{%url 'product_app:view_product'%}">

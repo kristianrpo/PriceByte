@@ -11,9 +11,29 @@ from applications.seller.models import Seller
 from applications.notification.models import Notification
 class SearchProducts(TemplateView):
     template_name = "product/search_product.html"
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        if hasattr(self.request.user, 'type'):
+            if self.request.user.type == "vendedor":
+                context['is_seller'] = "Si"
+            else:
+                context['is_seller'] = "No"
+        else:
+            context['is_seller'] = "No"
+        return context
     
 class SearchByNlp(TemplateView):
     template_name = "product/search_product_nlp.html"
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        if hasattr(self.request.user, 'type'):
+            if self.request.user.type == "vendedor":
+                context['is_seller'] = "Si"
+            else:
+                context['is_seller'] = "No"
+        else:
+            context['is_seller'] = "No"
+        return context
 
 class DetailProduct(DetailView):
     model = Product
@@ -53,6 +73,14 @@ class DetailProduct(DetailView):
             else:
                 product.total_avg_rating = "Sin reseñas"
         context["average_products"] = list_products
+
+        if hasattr(self.request.user, 'type'):
+            if self.request.user.type == "vendedor":
+                context['is_seller'] = "Si"
+            else:
+                context['is_seller'] = "No"
+        else:
+            context['is_seller'] = "No"
         return context
 
 class ViewProducts(ListView):
@@ -124,6 +152,14 @@ class ViewProducts(ListView):
             else:
                 product.total_avg_rating = "Sin reseñas"
         context["average_products"] = list_products
+
+        if hasattr(self.request.user, 'type'):
+            if self.request.user.type == "vendedor":
+                context['is_seller'] = "Si"
+            else:
+                context['is_seller'] = "No"
+        else:
+            context['is_seller'] = "No"
         return context
 
 class ViewAllProducts(ListView):
@@ -196,6 +232,14 @@ class ViewAllProducts(ListView):
             else:
                 product.total_avg_rating = "Sin reseñas"
         context["average_products"] = list_products
+
+        if hasattr(self.request.user, 'type'):
+            if self.request.user.type == "vendedor":
+                context['is_seller'] = "Si"
+            else:
+                context['is_seller'] = "No"
+        else:
+            context['is_seller'] = "No"
         return context
         
 def Search_products_NLP(request):
@@ -261,4 +305,11 @@ def Search_products_NLP(request):
                 product.total_avg_rating = round(product.total_avg_rating, 1)
             else:
                 product.total_avg_rating = "Sin reseñas"
-    return render(request, template_name, {'top_3_productos': top_3_productos, 'resto_productos': resto_productos, 'search_by': search_by,'average_products':list_products})
+        if hasattr(request.user, 'type'):
+            if request.user.type == "vendedor":
+                is_seller = "Si"
+            else:
+                is_seller = "No"
+        else:
+            is_seller = "No"
+    return render(request, template_name, {'top_3_productos': top_3_productos, 'resto_productos': resto_productos, 'search_by': search_by,'average_products':list_products, 'is_seller': is_seller})
