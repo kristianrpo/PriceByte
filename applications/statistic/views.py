@@ -167,7 +167,8 @@ def bar_chart(request, vendor_name):
             is_seller = "No"
         context = {
             'vendor_name': vendor_name,
-            'charts_data': charts_data,  
+            'charts_data': charts_data,
+            'is_seller':is_seller,
         }
 
         return render(request, 'statistic/chart.html', context)
