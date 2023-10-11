@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block settings_head %}
+    <title>Top productos</title>
+    <link rel="stylesheet" href="{% static 'css/statistic/quality.css' %}" />
+{% endblock settings_head %}
+
+{% block content %}
+    {% include 'components/nav_bar.html' with value_type="Si" %}
+    <br/><br/>
+    
+    <div class="global_container">
+        <h1>Calificación promedio de calidad por producto</h1>
+        <img src="{{ quality_chart_data_uri }}" alt="Quality Products Bar Chart">
+        
+        
+        <br/>
+        <br/>
+        
+    <h2 class="quality_title">Rango 1-2: Baja Calidad</h2>
+        <p class="quality_text">Productos con calificación 1 o 2 se considerarían de baja calidad.</p>
+        <p class="quality_text"><strong>Recomendación:</strong> Evaluar si es posible mejorar la calidad de estos productos o considerar su eliminación del inventario.</p>
+
+        <h2 class="quality_title">Rango 3: Calidad Aceptable</h2>
+        <p class="quality_text">Productos con calificación 3 tienen una calidad aceptable.</p>
+        <p class="quality_text"><strong>Recomendación:</strong> Puedes considerar mejoras incrementales en estos productos para elevar su calidad o explorar opciones para mantener su posición en el mercado.</p>
+
+        <h2 class="quality_title">Rango 4: Buena Calidad</h2>
+        <p class="quality_text">Productos con calificación 4 son de buena calidad.</p>
+        <p class="quality_text"><strong>Recomendación:</strong> Destacar estos productos como opciones premium y explorar estrategias para promoverlos y aumentar su visibilidad.</p>
+
+        <h2 class="quality_title">Rango 5: Excelente Calidad</h2>
+        <p class="quality_text">Productos con calificación 5 son de excelente calidad.</p>
+        <p class="quality_text"><strong>Recomendación:</strong> Estos productos deberían ser los puntos destacados de tu oferta. Utiliza estrategias de marketing para resaltar sus características excepcionales y considera ajustar precios acorde a su calidad.</p>
+        
+    </div>
+
+{% endblock content %}
