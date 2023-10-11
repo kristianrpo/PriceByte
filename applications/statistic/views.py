@@ -236,3 +236,61 @@ def quality_products(request, vendor_name):
     }
 
     return render(request, 'statistic/quality.html', context)
+
+
+def warranty_products(request, vendor_name):
+
+    vendor = Seller.objects.get(name_company_seller=vendor_name)
+    products = Product.objects.filter(distributed_by_product=vendor)
+    reviews_vendor = ProductRating.objects.filter(product__in=products)
+
+    product_avg_ratings = {}
+    for product in products:
+        product_reviews = reviews_vendor.filter(product=product)
+        avg_rating = product_reviews.aggregate(avg_rating=Avg('warranty_rating'))['avg_rating']
+
+        if avg_rating is not None:
+            avg_rating_str = f'{avg_rating:.2f}'
+        else:
+            avg_rating_str = 'No aplica'
+
+        product_avg_ratings[product.name_product] = avg_rating_str
+
+    df = pd.DataFrame(list(product_avg_ratings.items()), columns=['Nombre del Producto', 'Calificación Promedio'])
+
+    plt.style.use('seaborn-darkgrid')
+    plt.figure(figsize=(10, 4))  
+
+    ax = plt.subplot(111, frame_on=False)
+    ax.xaxis.set_visible(False)
+    ax.yaxis.set_visible(False)
+
+    table = pd.plotting.table(ax, df, loc='center', colWidths=[0.2, 0.2])
+
+    table.set_fontsize(15)
+
+    table.scale(1.5, 1.5)  
+
+    header_cells = table.get_celld()
+    for key, cell in header_cells.items():
+        if key[0] == 0:  
+            cell.set_fontsize(18)  
+            cell.set_text_props(weight='bold', color='white')
+            cell.set_facecolor('#537072')  
+
+    
+    plt.tight_layout()
+
+    buf = BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    plt.close()
+
+    data_uri = base64.b64encode(buf.read()).decode('utf-8')
+
+    context = {
+        'vendor_name': vendor_name,
+        'warranty_chart_data_uri': f'data:image/png;base64,{data_uri}',
+    }
+
+    return render(request, 'statistic/warranty.html', context)

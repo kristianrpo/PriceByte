@@ -80,7 +80,7 @@
             <div class="chart">
                 <img src="data:image/png;base64,{{ charts_data.warranty_rating_chart_base64 }}" alt="Warranty Rating Chart">
             </div>
-            <a class="right-button">Ver más información</a>
+            <a class="right-button" href="{% url 'warranty_products' vendor_name=vendor_name %}">Ver más información</a>
         </div>
     
         <button class="collapsible">Calificaciones por calidad</button>

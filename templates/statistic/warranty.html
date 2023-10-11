@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block settings_head %}
+    <title>Top productos</title>
+    <link rel="stylesheet" href="{% static 'css/statistic/quality.css' %}" />
+{% endblock settings_head %}
+
+{% block content %}
+    {% include 'components/nav_bar.html' with value_type="Si" %}
+    <br/><br/>
+    
+    <div class="global_container">
+        <h1>Calificación promedio de garantía por producto</h1>
+        <img src="{{ warranty_chart_data_uri }}" alt="Warranty Products Bar Chart">
+        
+        
+        <br/>
+        <br/>
+        
+    <h2 class="quality_title">Rango 1-2: Baja Garantía</h2>
+        <p class="quality_text">Productos con calificación 1 o 2 se considerarían de baja garantía.</p>
+        <p class="quality_text"><strong>Recomendación:</strong> Ofrecer una garantía extendida o un programa de devolución sin complicaciones. Esto puede ayudar a mitigar las preocupaciones de los clientes sobre la baja calidad.</p>
+
+        <h2 class="quality_title">Rango 3: Garantía Aceptable</h2>
+        <p class="quality_text">Productos con calificación 3 tienen una calidad aceptable.</p>
+        <p class="quality_text"><strong>Recomendación:</strong>  Proporcionar una garantía estándar que cubra los defectos de fabricación. También podrías ofrecer opciones de garantía extendida para aquellos que deseen una mayor seguridad.</p>
+
+        <h2 class="quality_title">Rango 4: Buena Garantía</h2>
+        <p class="quality_text">Productos con calificación 4 son de buena calidad.</p>
+        <p class="quality_text"><strong>Recomendación:</strong>  Establecer una garantía estándar que cubra defectos y problemas relacionados con el rendimiento. Destaca la durabilidad y fiabilidad de estos productos para respaldar la garantía.</p>
+
+        <h2 class="quality_title">Rango 5: Excelente Calidad Garantía</h2>
+        <p class="quality_text">Productos con calificación 5 son de excelente calidad.</p>
+        <p class="quality_text"><strong>Recomendación:</strong>Ofrecer una garantía robusta que cubra todos los aspectos del producto, incluyendo la durabilidad a largo plazo. Puedes considerar una garantía extendida premium para resaltar la calidad excepcional.</p>
+        
+    </div>
+
+{% endblock content %}
