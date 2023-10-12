@@ -359,7 +359,7 @@ def rec_price(request, vendor_name ):
         buy = float(request.POST.get('buy', 0))
         win = float(request.POST.get('win', 0))
         
-        # Realiza el cálculo para obtener el precio recomendado
-        sell = buy / (1 - (win / 100))
+        
+        sell= round(buy / (1 - (win / 100)), 2)
 
     return render(request, 'statistic/rprice.html', {'sell': sell})

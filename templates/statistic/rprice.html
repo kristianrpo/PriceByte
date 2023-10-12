@@ -8,22 +8,30 @@
 
 {% block content %}
     {% include 'components/nav_bar.html' with value_type="Si" %}
-    <br/><br/><br/><br/><br/>
-    <h1>Calculadora de Precio Recomendado</h1>
+    <br/><br/><br/><br/>
+    <div class="general_container">
+        <h1>Calculadora de Precio Recomendado</h1>
+        <br/><br/>
+        <p>Simplemente ingresa los valores solicitados y nuestro sistema calculará automáticamente el precio de venta para ti. Así, podrás establecer tus precios de manera fácil y rápida sin la necesidad de realizar complicados cálculos por tu cuenta.</p>
+        <br/><br/>
+        <form method="post" enctype="multipart/form-data" action="{% url 'rec_price' vendor_name=user.username %}"> {% csrf_token %}
 
-    <form method="post" action="{% url 'rec_price' vendor_name=user.username %}">
-        {% csrf_token %}
-        <label for="buy">Precio de Compra:</label>
-        <input type="number" name="buy" required>
+            <label for="buy">Precio de Compra:</label>
+            <p>Por favor, ingresa el precio que pagaste por el producto. Este es el costo inicial que incurriste al adquirirlo.</p>
+        </br>
+            <input type="number" name="buy" required>
 
-        <label for="win">Margen de Ganancia (%):</label>
-        <input type="number" name="win" required>
+            <label for="win">Margen de Ganancia (%):</label>
+            <p>Ahora, elige la cantidad de ganancia que te gustaría obtener al vender este producto. Esto determinará tu margen de beneficio.</p>
+    </br>
+            <input type="number" name="win" required>
+</br>
+            <button type="submit">Calcular Precio Recomendado</button>
+            <br/>
+        </form>
 
-        <button type="submit">Calcular Precio Recomendado</button>
-    </form>
-
-    {% if sell %}
-        <p>El precio de venta recomendado es: {{ sell }}</p>
-    {% endif %}
-    {% endblock content %}
-
+        {% if sell %}
+            <p>¡Listo! Basándonos en el precio que ingresaste como costo y la ganancia que deseas obtener, el precio de venta calculado para tu producto es ${{sell}}. Este sería el precio al que podrías ofrecer tu producto para alcanzar el margen de ganancia deseado. Siéntete libre de ajustar los valores y volver a calcular según tus necesidades.</p>
+        {% endif %}
+    </div>
+{% endblock content %}

@@ -1,37 +1,37 @@
-/* Establecer una imagen de fondo */
+
 body {
-   background-size: cover; /* Para ajustar la imagen de fondo al tamaño de la ventana */
-    background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
-    background-attachment: fixed; /* Fija la imagen de fondo en su lugar mientras se desplaza */
+   background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-/* Estilos para centrar el formulario */
+
 .container {
     text-align: center;
     padding: 20px;
 }
 
-/* Estilos para centrar horizontal y verticalmente */
+
 .form-container {
     background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.es%2Ffotos-vectores-gratis%2Flineas-minimalistas&psig=AOvVaw0Gzy2f1ywjw6UEJkYPePwi&ust=1694015910539000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCNjsvMLyk4EDFQAAAAAdAAAAABAI');
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Esto centra verticalmente el contenido */
+    height: 100vh; 
 }
 
-/* Estilos para el formulario */
+
 form {
     max-width: 400px;
     width: 100%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente para que la imagen de fondo sea visible */
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
-/* Estilos para el navbar en la parte superior */
+
 .navbar {
     background-color: #007bff;
     color: #fff;

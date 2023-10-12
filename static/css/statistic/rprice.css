@@ -1,16 +1,79 @@
-.global_container{
-    margin: 5vw 10vw 2vw 10vw;
+* {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.general_container {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    margin: 13vh 12vw 13vh 12vw;
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-h1 {
+.general_container input[type="number"] {
+    height: 6vh;
+    width: 13vw;
+    padding: 0 1vw;
+    color: #000;
+    border-radius: 5vw;
+    font-size: 1.3vw;
+    border: none;
+    background-color: rgba(208, 208, 208, 0.4);
+    margin-bottom: 1.5vh;
+}
+
+.general_container input[type="number"]:focus {
+    background-color: white;
+}
+
+.general_container p {
+    font-size: 1.4vw;
+    color: #2c4a52;
+    margin: 1.5vh 0;
+    text-align: center;
+}
+
+.general_container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.general_container form label {
+    font-size: 1.4vw;
+    font-weight: bold;
+    color: #2c4a52;
+}
+
+.general_container button {
+    box-shadow: 0 0 5px #2c4a52;
+    color: white;
+    background-color: #2c4a52;
+    text-decoration: none;
+    font-size: 1.3vw;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 1vw;
+    border: none;
+    cursor: pointer;
+    width: 80%; 
+}
+
+.general_container button:hover {
+    box-shadow: 0 0 5px #2c4a52, 0 0 25px #2c4a52;
+}
+
+.general_container h1 {
     font-size: 3vw;
-    color:#2c4a52;
+    color: #2c4a52;
     text-decoration: solid;
     -webkit-text-stroke: 2px black;
-    margin: 20px auto; 
-    text-align: center;
 }

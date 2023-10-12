@@ -59,7 +59,9 @@
     <div class = "global_container">
         <h1 class = "title_h1">Estadísticas de tus productos</h1>
         <button class="collapsible">Productos por categoría</button>
-        <div class="content">
+                <div class="content">
+            <p>Explora las categorías que destacan en el catálogo. Descubre cuáles son las más populares y cómo se distribuyen los productos entre ellas.</p>
+
             <div class="chart">
                 <img src="data:image/png;base64,{{ charts_data.category_chart_base64 }}" alt="Category Chart">
                 
@@ -68,7 +70,9 @@
         </div>
     
         <button class="collapsible">Calificaciones por precio</button>
+        
         <div class="content">
+            <p>Desde las calificaciones de precios hasta la satisfacción del cliente, esta sección brinda información clave sobre cómo los productos son valorados en términos de costos.</p>
             <div class="chart">
                 <img src="data:image/png;base64,{{ charts_data.price_rating_chart_base64 }}" alt="Price Rating Chart">
             </div>
@@ -76,7 +80,9 @@
         </div>
     
         <button class="collapsible">Calificaciones por garantía</button>
+        
         <div class="content">
+            <p>Utiliza las calificaciones en relación con las garantías para tomar decisiones estratégicas sobre el compromiso con la protección del cliente. Descubre qué tan seguros se sienten los compradores con los productos.</p>
             <div class="chart">
                 <img src="data:image/png;base64,{{ charts_data.warranty_rating_chart_base64 }}" alt="Warranty Rating Chart">
             </div>
@@ -85,6 +91,7 @@
     
         <button class="collapsible">Calificaciones por calidad</button>
         <div class="content">
+            <p>Analiza las calificaciones que los clientes han dejado sobre la calidad de nuestros productos. Aprende cómo perciben la durabilidad y el rendimiento de lo que ofrecemos.</p>
             <div class="chart">
                 <img src="data:image/png;base64,{{ charts_data.quality_rating_chart_base64 }}" alt="Quality Rating Chart">
             </div>
