@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static 'css/statistic/chart.css' %}" />
     <style>
         
-        h1 {
+        .title_h1 {
             font-size: 3vw;
             color:#2c4a52;
             text-decoration: solid;
@@ -57,7 +57,7 @@
 
     </br></br></br></br>
     <div class = "global_container">
-        <h1>Estadísticas de tus productos</h1>
+        <h1 class = "title_h1">Estadísticas de tus productos</h1>
         <button class="collapsible">Productos por categoría</button>
         <div class="content">
             <div class="chart">
@@ -91,6 +91,8 @@
             <a class="right-button"  href="{% url 'quality_products' vendor_name=vendor_name %}" >Ver más información</a>
         </div>
 </div>
+<br/><br/>
+{% include 'components/footer.html'%}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const collapsibles = document.querySelectorAll('.collapsible');

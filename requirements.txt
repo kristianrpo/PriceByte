@@ -48,3 +48,4 @@ tzdata==2023.3
 Unipath==1.1
 urllib3==2.0.4
 wasabi==1.1.2
+pandas==2.1.1
