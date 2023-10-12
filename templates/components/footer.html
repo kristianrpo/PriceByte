@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block settings_head %}
+<link href = "{%static 'css/components/footer.css'%}" rel = "stylesheet"/>
+<title>Footer</title>
+{% endblock settings_head %}
+
+{% block content %}
+<div class = "general___container">
+    <div class = "section_logo">
+        <img src = "{%static 'img/navbar/pricebyte.png'%}"/>
+        <h3>Compra inteligente, sin esfuerzo</h3>
+    </div>
+    <div class = "split">
+    </div>
+    <div class = "section_contact_us">
+        <h1>Contacta con nosotros</h1>
+        <form action="https://formspree.io/f/xqkvwpbe" method="POST">
+            <div class = "form_class">
+                <input class = "class_input" type = "text" id="email" name="email" placeholder="Correo"/>
+                <textarea id="description" name="message" rows="4" cols="50" placeholder="Mensaje"></textarea>
+                <button type="submit" value="enviar">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
