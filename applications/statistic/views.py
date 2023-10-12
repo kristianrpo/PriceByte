@@ -351,3 +351,15 @@ def price_products(request, vendor_name):
     }
 
     return render(request, 'statistic/price.html', context)
+
+def rec_price(request, vendor_name ):
+    sell = None
+
+    if request.method == 'POST':
+        buy = float(request.POST.get('buy', 0))
+        win = float(request.POST.get('win', 0))
+        
+        # Realiza el cálculo para obtener el precio recomendado
+        sell = buy / (1 - (win / 100))
+
+    return render(request, 'statistic/rprice.html', {'sell': sell})

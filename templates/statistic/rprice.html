@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block settings_head %}
+    <title>Top productos</title>
+    <link rel="stylesheet" href="{% static 'css/statistic/rprice.css' %}" />
+{% endblock settings_head %}
+
+{% block content %}
+    {% include 'components/nav_bar.html' with value_type="Si" %}
+    <br/><br/><br/><br/><br/>
+    <h1>Calculadora de Precio Recomendado</h1>
+
+    <form method="post" action="{% url 'rec_price' vendor_name=user.username %}">
+        {% csrf_token %}
+        <label for="buy">Precio de Compra:</label>
+        <input type="number" name="buy" required>
+
+        <label for="win">Margen de Ganancia (%):</label>
+        <input type="number" name="win" required>
+
+        <button type="submit">Calcular Precio Recomendado</button>
+    </form>
+
+    {% if sell %}
+        <p>El precio de venta recomendado es: {{ sell }}</p>
+    {% endif %}
+    {% endblock content %}
+
