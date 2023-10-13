@@ -7,7 +7,7 @@ from django.db import IntegrityError
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from applications.seller.views import *
-
+from applications.user.models import Client
 def home(request):
     if hasattr(request.user, 'type'):
         if request.user.type == "vendedor":
@@ -42,6 +42,8 @@ def signupaccount(request):
                 if(user.type== 'vendedor'):
                     return redirect('seller_app:create_seller', username=user.username, email=user.email)
                 else:
+                    client = Client(Name = user.username, email_client= user.email)
+                    client.save()
                     return redirect('product_app:search_product')
             except IntegrityError:
                 if hasattr(request.user, 'type'):
