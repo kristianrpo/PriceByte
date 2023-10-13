@@ -67,7 +67,8 @@
             <form method="GET" action="{% url 'review_app:AddReviewView' product.id %}">
               <button type="submit" class="button_details review-button" id="open-review-modal">Comentar producto</button>
             </form>
-          </div>
+        </div>
+        <a href="{% url 'product_app:Add_favorite' %}">Añadir producto a fav</a>
     </div>
 </div>
 <h1 class = "title_comments">COMENTARIOS</h1>

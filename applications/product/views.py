@@ -1,14 +1,17 @@
 from typing import Any, Dict
 from django.db.models.query import QuerySet
 from django.shortcuts import render
-from django.views.generic import ListView,DetailView,TemplateView
+from django.views.generic import ListView,DetailView,TemplateView, CreateView
 from django.shortcuts import render, get_object_or_404
-from .models import Product
+from .models import Product, Favorite
 from applications.review.models import ProductRating
 from django.db.models import Avg, F, Func, Value, IntegerField,DecimalField
 import spacy
 from applications.seller.models import Seller
 from applications.notification.models import Notification
+from django.urls import reverse_lazy
+from .forms import form_favorite
+
 class SearchProducts(TemplateView):
     template_name = "product/search_product.html"
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
@@ -313,3 +316,13 @@ def Search_products_NLP(request):
         else:
             is_seller = "No"
     return render(request, template_name, {'top_3_productos': top_3_productos, 'resto_productos': resto_productos, 'search_by': search_by,'average_products':list_products, 'is_seller': is_seller})
+
+
+class Confirm_favorite(CreateView):
+    form_class = form_favorite
+    template_name = "product/confirm_favorite.html"
+    success_url = ('product_app:detail_product')
+
+    def form_valid (self, **kwargs: Any):
+        
+        return render()

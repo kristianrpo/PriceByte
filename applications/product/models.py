@@ -1,5 +1,7 @@
 from django.db import models
 from applications.seller.models import Seller
+from applications.accounts.models import User
+
 class ImagesProduct(models.Model):
     images_product = models.ImageField(("image"),upload_to='product/')
     def __str__(self):
@@ -19,3 +21,10 @@ class Product(models.Model):
     code_product = models.CharField(("Código"),max_length=20)
     def __str__(self):
         return str(self.name_product)
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return str(f'{self.product.name_product} y {self.user.username}')
