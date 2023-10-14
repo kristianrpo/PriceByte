@@ -20,6 +20,11 @@
 .single-product .col-2 img{
     padding:0;
 }
+
+.hide_form {
+  display: none;
+}
+
 .general_container{
     display: flex;
     justify-content: center;

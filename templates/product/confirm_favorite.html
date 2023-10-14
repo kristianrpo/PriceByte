@@ -1,0 +1,29 @@
+{%extends 'base.html'%}
+{%load static%}
+{% block settings_head%}
+<title>Añadir producto</title>
+<link href = "{%static 'css/seller/DeleteProduct.css'%}" rel = "stylesheet"/>
+{%endblock settings_head%}
+{% block content%}
+{% include 'components/nav_bar.html' with value_type=is_seller%}
+<style>
+    .hide_form {
+    display: none;
+}
+</style>
+<div class = "general_container">
+    <h1> ¿Desea añadir el producto? </h1>
+    <div class = "buttons">
+
+        <form method="post">{% csrf_token %}
+            <div class="hide_form">
+                {{form}}
+            </div>
+            <button type="submit">Añadir</button>
+        </form>
+        
+        <a href="{% url 'product_app:search_product' %}" class = "button">Cancelar</a>
+    </div>
+</div>
+{% include 'components/footer.html'%}
+{% endblock content%}

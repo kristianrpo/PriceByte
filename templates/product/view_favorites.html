@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block settings_head %}
+<title>Todos los productos</title>
+<link rel = "stylesheet" href = "{%static 'css/product/view_all_products.css'%}"/>
+{% endblock settings_head %}
+{%block content%}
+{% include 'components/nav_bar.html' with value_type=is_seller%}
+<div class = "global_container">
+    <div class = "title">
+        <h1> TUS PRODUCTOS FAVORITOS</span></h1>
+    </div>
+    <div class="container__images">
+        {% for each_product in product%}
+            
+            <div class="product_item">
+                {% for image in each_product.image_product.all|slice:":1" %}
+                    {% for average_element in average_products%}
+                        {%if average_element.id == each_product.id%}
+                        <div class="product_image" id = "button_general">
+                            <img src="{{ image.images_product.url }}" class="products_images" />
+                            <h1>{{each_product.name_product}}</h1><p class = "price">{{each_product.price_product}}</p>
+                            <p class = "rating">
+                                {{average_element.total_avg_rating}} 
+                                {% if average_element.total_avg_rating >= 4.5 %}
+                                ⭐ ⭐ ⭐ ⭐ ⭐
+                                {%endif%}
+                                {% if average_element.total_avg_rating >= 3.8 and average_element.total_avg_rating < 4.5%}
+                                ⭐ ⭐ ⭐ ⭐
+                                {%endif%}
+                                {% if average_element.total_avg_rating >= 3 and average_element.total_avg_rating < 3.8%}
+                                ⭐ ⭐ ⭐
+                                {%endif%}
+                                {%  if average_element.total_avg_rating >= 2  and average_element.total_avg_rating < 3%}
+                                ⭐ ⭐
+                                {%endif%}
+                                {%  if average_element.total_avg_rating >= 0 and average_element.total_avg_rating < 2%}
+                                ⭐
+                                {%endif%}
+                            </p>
+                            <a href = "{%url 'product_app:detail_product' each_product.id%}" class = "button_details">Detalles</a>
+                        </div>
+                        {%endif%}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+
+
+
+    </div>
+    <div class = "pages_options">
+        <ul>
+            {% if page_obj.has_previous%}
+            <li>
+                <a href = "?product={{searched_product}}&option={{search_by}}&page={{page_obj.previous_page_number}}" class = "exist_page">←</a>
+            </li>
+            {% else %}
+            <li>
+                <a href = "#" class = "not_exist_page">←</a>
+            </li>
+            {%endif%}
+            {% for page in paginator.page_range%}
+                {% if page == page_obj.number %}
+                <li>
+                    <a href = "#" class = "current_page">{{page}}</a>
+                </li>
+                {%else%}
+                <li>
+                    <a href = "?product={{searched_product}}&option={{search_by}}&page={{page}}" class = "exist_page">{{page}}</a>
+                </li>
+                {% endif%}
+            {%endfor%}
+            {% if page_obj.has_next%}
+            <li>
+                <a href = "?product={{searched_product}}&option={{search_by}}&page={{page_obj.next_page_number}}" class = "exist_page">→</a>
+            </li>
+            {% else %}
+            <li>
+                <a href = "#" class = "not_exist_page">→</a>
+            </li>
+            {%endif%}
+        </ul>
+    </div>
+</div>
+{% include 'components/footer.html'%}
+{%endblock content%}

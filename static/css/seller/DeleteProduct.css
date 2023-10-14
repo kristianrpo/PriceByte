@@ -16,6 +16,11 @@
 .general_container h1{
     font-size: 2.5vw;
 }
+
+.hide_form {
+    display: none;
+}
+
 .buttons button{
     box-shadow: 0 0 5px #2c4a52;
     color:white;

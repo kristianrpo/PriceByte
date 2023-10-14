@@ -8,6 +8,7 @@ from applications.review.models import ProductRating
 from django.db.models import Avg, F, Func, Value, IntegerField,DecimalField
 import spacy
 from applications.seller.models import Seller
+from applications.user.models import Client
 from applications.notification.models import Notification
 from django.urls import reverse_lazy
 from .forms import form_favorite
@@ -323,6 +324,131 @@ class Confirm_favorite(CreateView):
     template_name = "product/confirm_favorite.html"
     success_url = ('product_app:detail_product')
 
-    def form_valid (self, **kwargs: Any):
+    def form_valid (self, form):
+        if self.request.method == 'POST':
+            temp_user = self.request.user
+            user_real = Client.objects.get(Name = temp_user)
+            
+            product = self.kwargs['pk']
+
+            print(product)
+
+            product_real = Product.objects.get(id = product)
+
+            Favorite.objects.create(
+                user = temp_user,
+                product = product_real
+            )
+
         
-        return render()
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        
+        return self.request.GET.get('next', reverse_lazy('product_app:search_product'))
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        product = self.kwargs['pk']
+        temp_user = self.request.user
+        kwargs['initial'] = {'user': temp_user, 'product': Product.objects.get(id = product)}
+        return kwargs
+
+        
+
+class Favorites(ListView):
+    model = Favorite, Product
+    template_name = "product/view_favorites.html"
+    context_object_name = "product"
+    paginate_by = 4
+
+    def get_queryset(self):
+        searched_product = self.request.GET.get("product", '')
+        option = self.request.GET.get("option", '')
+        list_products1 = Favorite.objects.filter(user=self.request.user)
+
+        lista_nombres = []
+
+        for product in list_products1:
+            lista_nombres.append(product.product.name_product)
+        
+        
+
+        list_products = Product.objects.filter(name_product__in=lista_nombres)
+        print(list_products)
+
+        if option == "precio":
+            list_products = list_products.order_by('price_product')
+        if option == "valoración":
+            list_products = list_products.annotate(
+            avg_price_rating=Avg('productrating__price_rating'),
+            avg_quality_rating=Avg('productrating__quality_rating'),
+            avg_warranty_rating=Avg('productrating__warranty_rating')
+            )
+            list_products = list_products.annotate(
+                total_avg_rating=(F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
+            )
+            list_products = list_products.order_by('-total_avg_rating')
+        if option == "recomendación pricebyte":
+            weight_price = 0.5
+            weight_rating = 0.7
+            list_products = list_products.annotate(
+            avg_price_rating=Avg('productrating__price_rating'),
+            avg_quality_rating=Avg('productrating__quality_rating'),
+            avg_warranty_rating=Avg('productrating__warranty_rating')
+            )
+            list_products = list_products.annotate(
+                total_avg_rating=(F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
+            )
+            list_products = list_products.annotate(
+                recommendation_pricebyte = ((F('total_avg_rating'))*weight_rating)/(F('price_product')*weight_price)
+            )
+            for product in list_products:
+                print(f"Producto: {product.name_product}, Promedio: {product.recommendation_pricebyte}")
+            list_products = list_products.order_by('-recommendation_pricebyte')
+        if len(list_products)>0:
+            return list_products
+        else:
+            return []
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        option = self.request.GET.get("option", '')
+        context['search_by'] = option
+
+        list_products1 = Favorite.objects.filter(user=self.request.user)
+
+        lista_nombres = []
+
+        for product in list_products1:
+            lista_nombres.append(product.product.name_product)
+        
+        
+
+        list_products = Product.objects.filter(name_product__in=lista_nombres)
+        list_products = list_products.annotate(
+            avg_price_rating=Avg('productrating__price_rating'),
+            avg_quality_rating=Avg('productrating__quality_rating'),
+            avg_warranty_rating=Avg('productrating__warranty_rating')
+            )
+        list_products = list_products.annotate(
+            total_avg_rating=(F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
+        )
+        for product in list_products:
+            if product.avg_price_rating is not None and product.avg_quality_rating is not None and product.avg_warranty_rating is not None:
+                product.avg_price_rating = round(product.avg_price_rating, 1)
+                product.avg_quality_rating = round(product.avg_quality_rating, 1)
+                product.avg_warranty_rating = round(product.avg_warranty_rating, 1)
+                product.total_avg_rating = round(product.total_avg_rating, 1)
+            else:
+                product.total_avg_rating = "Sin reseñas"
+        context["average_products"] = list_products
+
+        if hasattr(self.request.user, 'type'):
+            context['is_seller'] = "Si" if self.request.user.type == "vendedor" else "No"
+        else:
+            context['is_seller'] = "No"
+
+        return context
