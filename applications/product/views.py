@@ -45,6 +45,18 @@ class DetailProduct(DetailView):
     context_object_name = "product"
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
+        list_products1 = Favorite.objects.filter(user=self.request.user)
+
+        lista_nombres = []
+
+        for product in list_products1:
+            lista_nombres.append(product.product.name_product)
+        
+        
+
+        list_products_favorites = Product.objects.filter(name_product__in=lista_nombres)
+        context['list_products_favorites'] = list_products_favorites
+        
         if self.request.user.is_authenticated and Seller.objects.filter(name_company_seller__icontains = self.request.user):
             seller_name = Seller.objects.get(name_company_seller = self.request.user)
             notifications = Notification.objects.filter(

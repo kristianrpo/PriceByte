@@ -68,11 +68,13 @@
               <button type="submit" class="button_details review-button" id="open-review-modal">Comentar producto</button>
             </form>
         </div>
-        <div class="button">
-            <form method="GET" action="{% url 'product_app:Add_favorite' product.id %}">
-              <button type="submit" class="button_details review-button" id="open-review-modal">Añadir a favoritos</button>
-            </form>
-        </div>
+        {% if product not in list_products_favorites %}
+            <div class="button">
+                <form method="GET" action="{% url 'product_app:Add_favorite' product.id %}">
+                <button type="submit" class="button_details review-button" id="open-review-modal">Añadir a favoritos</button>
+                </form>
+            </div>
+        {% endif %}
     </div>
 </div>
 <h1 class = "title_comments">COMENTARIOS</h1>
