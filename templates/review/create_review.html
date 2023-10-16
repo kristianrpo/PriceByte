@@ -40,7 +40,9 @@
       {{ form.description }}
 
       <button type="submit" class="button_details">Crear comentario</button>
-      <p><a href="{% url 'product_app:detail_product' product.id %}">Volver al detalle del producto</a></p>
+      <a class="custom-color"href="{% url 'product_app:detail_product' product.id %}">Volver al detalle del producto</a>
+
+
     </form>
   </div>
 </div>

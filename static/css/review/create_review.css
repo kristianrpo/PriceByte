@@ -97,8 +97,13 @@
     color: #2c4a52;
     margin-bottom: 0.5vh;
 }
+ p {
+  font-size: 1.4vw;
+    font-weight: bold;
+    color: #2c4a52;
+    margin-bottom: 0.5vh;
+ }
 
-/* Estilo para las estrellas */
 .rating {
     display: flex;
     flex-direction: row-reverse;
@@ -117,5 +122,20 @@
 .rating input:checked ~ label,
 .rating label:hover,
 .rating label:hover ~ label {
-    color: #ffa500; /* Color de la estrella al pasar el ratón sobre ella o cuando está seleccionada */
+    color: #ffa500; 
+}
+
+.green-text {
+  color: #2c4a52; 
+  font-size: 1.4vw;
+  font-weight: bold;
+  margin-bottom: 0.5vh;
+}
+
+
+.custom-color {
+  color: #2c4a52; 
+  font-size: 1.4vw;
+  font-weight: bold;
+  margin-bottom: 0.5vh;
 }
