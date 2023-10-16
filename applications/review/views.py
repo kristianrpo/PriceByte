@@ -6,6 +6,7 @@ from applications.product.models import Product
 from .forms import ProductRatingForm
 from applications.accounts.views import loginaccount
 from applications.notification.models import Notification
+
 @login_required(login_url=loginaccount) 
 def AddReviewView(request, pk):
     product = get_object_or_404(Product, pk=pk)

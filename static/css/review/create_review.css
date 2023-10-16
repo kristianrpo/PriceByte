@@ -90,4 +90,32 @@
   .button_details:hover {
     box-shadow: 0 0 5px #2c4a52, 0 0 25px #2c4a52;
   }
-  
+ 
+  .modal form label {
+    font-size: 1.4vw;
+    font-weight: bold;
+    color: #2c4a52;
+    margin-bottom: 0.5vh;
+}
+
+/* Estilo para las estrellas */
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    font-size: 2vw;
+    color: #2c4a52;
+    cursor: pointer;
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+    color: #ffa500; /* Color de la estrella al pasar el ratón sobre ella o cuando está seleccionada */
+}

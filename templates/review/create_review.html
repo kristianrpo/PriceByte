@@ -5,17 +5,39 @@
 <link href="{% static 'css/review/create_review.css' %}" rel="stylesheet" />
 {% endblock settings_head %}
 {% block content %}
-{% include 'components/nav_bar.html' with value_type=is_seller%}
+{% include 'components/nav_bar.html' with value_type=is_seller %}
 <br/>
 <div class="overlay">
   <div class="modal">
     <h2>Agregar un comentario para el producto</h2>
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      {{ form.price_rating.label_tag }} {{ form.price_rating }}
-      {{ form.quality_rating.label_tag }} {{ form.quality_rating }}
-      {{ form.warranty_rating.label_tag }} {{ form.warranty_rating }}
-      {{ form.description.label_tag }} {{ form.description }}
+      <label for="id_price_rating">Precio:</label>
+      <div class="rating">
+        {% for i in "54321" %}
+          <input type="radio" id="price_rating{{ i }}" name="price_rating" value="{{ i }}" {% if form.price_rating.value == i %}checked{% endif %}>
+          <label for="price_rating{{ i }}">★</label>
+        {% endfor %}
+      </div>
+
+      <label for="id_quality_rating">Calidad:</label>
+      <div class="rating">
+        {% for i in "54321" %}
+          <input type="radio" id="quality_rating{{ i }}" name="quality_rating" value="{{ i }}" {% if form.quality_rating.value == i %}checked{% endif %}>
+          <label for="quality_rating{{ i }}">★</label>
+        {% endfor %}
+      </div>
+
+      <label for="id_warranty_rating">Garantía:</label>
+      <div class="rating">
+        {% for i in "54321" %}
+          <input type="radio" id="warranty_rating{{ i }}" name="warranty_rating" value="{{ i }}" {% if form.warranty_rating.value == i %}checked{% endif %}>
+          <label for="warranty_rating{{ i }}">★</label>
+        {% endfor %}
+      </div>
+
+      <label for="id_description">Descripción:</label>
+      {{ form.description }}
 
       <button type="submit" class="button_details">Crear comentario</button>
       <p><a href="{% url 'product_app:detail_product' product.id %}">Volver al detalle del producto</a></p>
