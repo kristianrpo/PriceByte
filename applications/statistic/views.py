@@ -377,14 +377,13 @@ def categories(request, vendor_name):
     product_avg_ratings_by_category = {}
 
     for category in Category.objects.all():
-        # Filtra los productos de la categoría actual
         category_products = products.filter(categories_product=category)
 
-        if category_products.exists():  # Verifica si hay productos en la categoría
+        if category_products.exists(): 
             category_avg_ratings = {}
 
             for product in category_products:
-                # Filtra las revisiones del producto actual
+
                 product_reviews = reviews_vendor.filter(product=product)
                 avg_rating = product_reviews.aggregate(avg_rating=Avg('price_rating'))['avg_rating']
 
@@ -395,16 +394,15 @@ def categories(request, vendor_name):
 
                 category_avg_ratings[product.name_product] = avg_rating_str
 
-            # Crea un DataFrame para la categoría actual
             df_category = pd.DataFrame(list(category_avg_ratings.items()), columns=['Nombre del Producto', 'Calificación Promedio'])
 
-            # Convierte el DataFrame a HTML sin incluir atributos border y class
+
             table_html = df_category.to_html(index=False, escape=False, classes='table table-striped', border=0)
 
-            # Estilo específico para la tabla dentro del HTML generado por pandas
+
             table_html = table_html.replace('<table', '<table style="border-collapse: collapse; width: 100%;"')
 
-            # Agrega el HTML de la tabla al diccionario final
+
             product_avg_ratings_by_category[category.name_category] = table_html
 
     context = {
