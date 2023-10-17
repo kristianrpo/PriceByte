@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block settings_head %}
+    <title>Calificaciones por Categoría - {{ vendor_name }}</title>
+    <link rel="stylesheet" href="{% static 'css/statistic/chart.css' %}" />
+{% endblock settings_head %}
+
+{% block content %}
+    {% include 'components/nav_bar.html' with value_type="Si" %}
+    <br/>
+
+    <div class="global_container">
+        <h1>Calificaciones por Categoría para {{ vendor_name }}</h1>
+
+        {% for category, table_html in product_avg_ratings_by_category.items %}
+            <h2>{{ category }}</h2>
+            {% if table_html %}
+                
+                {{ table_html|safe }}
+            {% else %}
+                <p>No hay datos para mostrar en esta categoría.</p>
+            {% endif %}
+    </br>
+        {% endfor %}
+
+
+
+        <h2 class="quality_title">Categorías con Productos Mejor Calificados y Mayor Cantidad:</h2>
+        <p class="quality_text"></p>
+        <p class="quality_text"><strong>Gestión de Inventario Eficiente:</strong>Asegúrate de tener suficiente inventario para satisfacer la demanda de productos altamente calificados y con gran rotación.</p>
+        <p class="quality_text"><strong>Promoción de Productos Estrella:</strong>Destaca y promociona de manera activa los productos mejor calificados en estas categorías para aumentar su visibilidad.</p>
+        <p class="quality_text"><strong>Programa de Fidelidad:</strong>Implementa un programa de fidelidad para recompensar a los clientes que compran productos altamente calificados con 
+            descuentos o beneficios adicionales.</p>
+
+        <h2 class="quality_title">Categorías con Productos Bien Calificados y Menor Cantidad:</h2>
+        <p class="quality_text"><strong>Incentivos para Incrementar Stock:</strong> Ofrece incentivos a los clientes para comprar productos en estas categorías, como descuentos especiales o promociones exclusivas.</p>
+        <p class="quality_text"><strong>Promociones Estratégicas:</strong>Implementa promociones estratégicas para productos con buenas calificaciones pero menor rotación para aumentar su demanda.</p>
+
+        <h2 class="quality_title">Categorías con Productos Menos Calificados y Mayor Cantidad:</h2>
+        <p class="quality_text"><strong>Revisión de Calidad y Mejora:</strong> Investiga las razones detrás de las calificaciones más bajas y trabaja en la mejora de la calidad de estos productos.</p>
+        <p class="quality_text"><strong>Incentivos para Calificaciones:</strong> Ofrece incentivos adicionales para obtener calificaciones y reseñas en productos de estas categorías para mejorar su reputación.</p>
+
+        <h2 class="quality_title">Categorías con Productos Menos Calificados y Menor Cantidad:</h2>
+        <p class="quality_text"><strong>Evaluación de Viabilidad:</strong> Considera la viabilidad a largo plazo de mantener productos con bajas calificaciones y baja rotación en estas categorías.</p>
+        <p class="quality_text"><strong>Investigación de Mercado:</strong> Realiza una investigación de mercado para entender si hay oportunidades para mejorar estos productos o si es más beneficioso eliminarlos.</p>
+    </div>
+{% endblock content %}

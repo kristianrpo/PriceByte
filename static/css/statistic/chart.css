@@ -31,6 +31,15 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    font-size: 2vw;
+    color:#2c4a52;
+    text-decoration: solid;
+    -webkit-text-stroke: 1px black;
+    margin: 20px auto; 
+    text-align: center;
+}
+
 
 
 a {
@@ -90,4 +99,36 @@ a {
     border: none;
     margin: 20px auto; 
     text-align: center;
+}
+
+/* categories.css */
+
+.table-container {
+    margin-bottom: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden; /* Añadido para ocultar la barra superior */
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #537072;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
 }

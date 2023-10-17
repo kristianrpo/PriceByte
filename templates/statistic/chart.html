@@ -66,7 +66,7 @@
                 <img src="data:image/png;base64,{{ charts_data.category_chart_base64 }}" alt="Category Chart">
                 
             </div>
-            <a class="right-button">Ver más información</a>
+            <a class="right-button"  href="{% url 'categories' vendor_name=vendor_name %}">Ver más información</a>
         </div>
     
         <button class="collapsible">Calificaciones por precio</button>

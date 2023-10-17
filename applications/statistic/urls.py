@@ -8,5 +8,7 @@ urlpatterns = [
     path('warranty/<str:vendor_name>/', views.warranty_products, name='warranty_products'),
     path('price/<str:vendor_name>/', views.price_products, name='price_products'),
     path('recommend_price/<str:vendor_name>/', views.rec_price, name='rec_price'),
+    path('categories/<str:vendor_name>/', views.categories, name='categories'),
+
 
 ]

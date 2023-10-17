@@ -24,7 +24,7 @@
             <a href = "{%url 'bar_chart' vendor_name=user.username %}">Estadísticas</a>
             <a href =  "{%url 'rec_price' vendor_name=user.username %}">Recomendación de precio</a>
             {% if user.is_authenticated %}
-                <a class="nav-link" href="{% url 'logoutaccount' %}">Logout ({{ user.username }} / {{ user.type }})</a>
+                <a class="nav-link" href="{% url 'logoutaccount' %}">Cerrar Sesión ({{ user.username }} / {{ user.type }})</a>
             {% else %}
                 <a href = "{% url 'loginaccount' %}">Iniciar Sesión</a>
                 <a href = "{% url 'signupaccount' %}">Registrarse</a>
