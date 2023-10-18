@@ -4,6 +4,7 @@
 {% block settings_head %}
     <title>Top productos</title>
     <link rel="stylesheet" href="{% static 'css/statistic/chart.css' %}" />
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 {% endblock settings_head %}
 
 {% block content %}
@@ -36,7 +37,18 @@
         <h2 class="quality_title">Rango 5: Excelente Calidad</h2>
         <p class="quality_text">Productos con calificación 5 son de excelente calidad.</p>
         <p class="quality_text"><strong>Recomendación:</strong> Estos productos deberían ser los puntos destacados de tu oferta. Utiliza estrategias de marketing para resaltar sus características excepcionales y considera ajustar precios acorde a su calidad.</p>
-        
+    </br>
+    <button id="descargarImagen" class="descargar-btn">Descargar Reporte</button>
     </div>
+        <script>
+            document.getElementById('descargarImagen').addEventListener('click', function () {
+                html2canvas(document.querySelector(".global_container")).then(canvas => {
+                    var link = document.createElement('a');
+                    link.href = canvas.toDataURL('image/png');
+                    link.download = 'reporte_calidad.png';
+                    link.click();
+                });
+            });
+        </script>
 
 {% endblock content %}
