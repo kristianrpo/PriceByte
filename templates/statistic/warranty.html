@@ -3,7 +3,7 @@
 
 {% block settings_head %}
     <title>Top productos</title>
-    <link rel="stylesheet" href="{% static 'css/statistic/quality.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/statistic/chart.css' %}" />
 {% endblock settings_head %}
 
 {% block content %}
@@ -15,8 +15,11 @@
         <img src="{{ warranty_chart_data_uri }}" alt="Warranty Products Bar Chart">
         
         
-        <br/>
-        <br/>
+        <div class="cuadro-nota">
+            <span class="texto-grueso">NOTA ACLARATORIA</span>
+            <p class = "grey">La calificación promedio corresponde al promedio de las calificaciones por garantía proporcionada por los usuarios de cada producto.</p>
+        </div>
+    </br>
         
     <h2 class="quality_title">Rango 1-2: Baja Garantía</h2>
         <p class="quality_text">Productos con calificación 1 o 2 se considerarían de baja garantía.</p>

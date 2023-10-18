@@ -30,3 +30,26 @@
     margin-bottom: 10px;
 }
 
+.grey {
+    
+    color: #888888; 
+    font-family: 'Tilt Neon', cursive;
+      
+}
+
+.cuadro-nota {
+ font-family: 'Tilt Neon', cursive; 
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px;
+  text-align: center;
+  }
+
+  .texto-grueso {
+    color: #888888; 
+    font-family: 'Tilt Neon', cursive; 
+    font-weight: bold; 
+  }

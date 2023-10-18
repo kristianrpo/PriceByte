@@ -3,7 +3,7 @@
 
 {% block settings_head %}
     <title>Top productos</title>
-    <link rel="stylesheet" href="{% static 'css/statistic/quality.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/statistic/chart.css' %}" />
 {% endblock settings_head %}
 
 {% block content %}
@@ -11,13 +11,16 @@
     <br/><br/>
     
     <div class="global_container">
-        <h1>Calificación promedio de calidad por producto</h1>
+        <h1 class = "title1">Calificación promedio de calidad por producto</h1>
         <img src="{{ price_chart_data_uri }}" alt="Price Products Bar Chart">
         
-        
-        <br/>
-        <br/>
-        
+    
+        <div class="cuadro-nota">
+            <span class="texto-grueso">NOTA ACLARATORIA</span>
+            <p class = "grey">La calificación promedio corresponde al promedio de las calificaciones por precio proporcionada por los usuarios de cada producto.</p>
+        </div>
+        </>
+
     <h2 class="quality_title">Rango 1-2: Precio Muy Bajo O Muy Alto:</h2>
         <p class="quality_text">Puede ser que el precio sea demasiado bajo, lo que podría hacer que los clientes sospechen de la calidad. Por otro lado, un precio demasiado alto puede disuadir a los compradores.</p>
         <p class="quality_text"><strong>Recomendación:</strong> Evaluar la calidad del producto y ajustar el precio en consecuencia.
