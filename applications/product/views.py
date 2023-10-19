@@ -464,3 +464,4 @@ class Favorites(ListView):
             context['is_seller'] = "No"
 
         return context
+    

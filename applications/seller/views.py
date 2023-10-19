@@ -11,6 +11,7 @@ from .forms import FormCreateProduct
 from applications.notification.models import Notification
 from applications.review.models import ProductRating
 from django.db.models import Avg, F, Func, Value, IntegerField,DecimalField
+
 class SellerView(SuccessMessageMixin,ListView):
     model = Product
     template_name = "seller/HomeSeller.html"

@@ -9,3 +9,5 @@ class form_favorite(forms.ModelForm):
             'product',
         )
         
+class SubirCSVForm(forms.Form):
+    archivo_csv = forms.FileField()
