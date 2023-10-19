@@ -28,6 +28,7 @@
     border-left: 1px solid #fff;
     border-right: 2px solid #fff;
     height: 120px;
+    margin: 0 2vw;
   }
 .general___container .section_contact_us{
     display: flex;
