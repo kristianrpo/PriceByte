@@ -146,6 +146,8 @@ class ViewProducts(ListView):
         option = self.request.GET.get("option",'')
         context = super().get_context_data(**kwargs)
         context['search_by'] = option
+        if context['search_by'] == "recomendación pricebyte":
+            context['search_by'] = "recomendación"
         context['searched_product'] = searched_product
         
         searched_product = self.request.GET.get("product",'')
