@@ -63,17 +63,22 @@
             <div>Local: {{product.distributed_by_product.local_number_seller}}</div>
         </h3>
     </br>
+    {% if user.is_authenticated %}
         <div class="button-container">
             <form method="GET" action="{% url 'review_app:AddReviewView' product.id %}">
               <button type="submit" class="button_details review-button" id="open-review-modal">Comentar producto</button>
             </form>
         </div>
+        
         {% if product not in list_products_favorites %}
             <div class="button">
                 <form method="GET" action="{% url 'product_app:Add_favorite' product.id %}">
                 <button type="submit" class="button_details review-button" id="open-review-modal">Añadir a favoritos</button>
                 </form>
             </div>
+        {% endif %}
+        {% else %}
+            <p>Inicia sesión para comentar el producto.</p>
         {% endif %}
     </div>
 </div>
