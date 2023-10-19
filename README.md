@@ -23,12 +23,16 @@ This should display the installed Python version, confirming a successful instal
 
 ### Fork the original github repository
 -Open ```https://github.com/kristianrpo/PriceByte```<br/>
--Click on "Fork" <br/>
+-Click on "Fork". <br/>
+-Click on "Create fork". <br/>
 A local copy of the PriceByte project should have been created in your github account<br/>
 
 ### Clone your github repository: <br/>
 -Open your web browser and go to https://github.com.<br/>
 -Log in to your GitHub account if you haven't already.<br/>
+-Go to the local copy created in your github repository after fork.<br/>
+-Click on "<> Code"<br/>
+-Copy link of the repository (HTTPS) <br/>
 -Into the Command Prompt or Powershell run:<br/>
 ``` git clone 'link_repository'```<br/>
 
