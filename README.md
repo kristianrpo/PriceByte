@@ -22,9 +22,9 @@ Breve descripción del proyecto y su propósito.<br/>
 This should display the installed Python version, confirming a successful installation.<br/>
 
 ### Fork the original github repository
-- Open ```https://github.com/kristianrpo/PriceByte```
-- Click on "Fork"
-A local copy of the PriceByte project should have been created in your github account
+-Open ```https://github.com/kristianrpo/PriceByte```<br/>
+-Click on "Fork" <br/>
+A local copy of the PriceByte project should have been created in your github account<br/>
 
 ### Clone your github repository: <br/>
 -Open your web browser and go to https://github.com.<br/>
