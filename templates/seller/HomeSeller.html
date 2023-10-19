@@ -104,7 +104,12 @@
     </div>
     <br/>
     <a href = "{% url 'seller_app:create_product'%}" class = "button_details">Crear producto</a>
+    <label for="csv_file" class = "button_details">Subir archivo CSV</label>
+    <input type="file" id="csv_file" name="csv_file" accept=".csv" style="display: none;">
 </div>
+
+
+
 {% include 'components/footer.html'%}
 <script>
     var productDivs = document.querySelectorAll('.product_image');

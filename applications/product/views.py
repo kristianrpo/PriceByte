@@ -1,4 +1,5 @@
 from typing import Any, Dict
+import csv
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView,TemplateView, CreateView
@@ -8,10 +9,15 @@ from applications.review.models import ProductRating
 from django.db.models import Avg, F, Func, Value, IntegerField,DecimalField
 import spacy
 from applications.seller.models import Seller
+from .models import ImagesProduct, Category 
+from applications.seller.models import Seller
 from applications.user.models import Client
 from applications.notification.models import Notification
 from django.urls import reverse_lazy
-from .forms import form_favorite
+from .forms import form_favorite, TuFormulario
+from django.shortcuts import get_object_or_404
+from applications.accounts.models import User
+from applications.seller.models import Seller
 
 class SearchProducts(TemplateView):
     template_name = "product/search_product.html"
@@ -45,18 +51,10 @@ class DetailProduct(DetailView):
     context_object_name = "product"
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
-        list_products1 = Favorite.objects.filter(user=self.request.user)
-
-        lista_nombres = []
-
-        for product in list_products1:
-            lista_nombres.append(product.product.name_product)
-        
-        
-
-        list_products_favorites = Product.objects.filter(name_product__in=lista_nombres)
-        context['list_products_favorites'] = list_products_favorites
-        
+        if self.request.user.is_authenticated:
+            list_products1 = Favorite.objects.filter(user=self.request.user)
+            lista_nombres = [product.product.name_product for product in list_products1]
+            context['list_products_favorites'] = Product.objects.filter(name_product__in=lista_nombres)
         if self.request.user.is_authenticated and Seller.objects.filter(name_company_seller__icontains = self.request.user):
             seller_name = Seller.objects.get(name_company_seller = self.request.user)
             notifications = Notification.objects.filter(
@@ -466,4 +464,77 @@ class Favorites(ListView):
             context['is_seller'] = "No"
 
         return context
+def obtener_instancia_seller(usuario_actual):
     
+    usuario_seller = get_object_or_404(User, pk=usuario_actual.pk)
+    
+    seller_instance, creado = Seller.objects.get_or_create(user=usuario_seller)
+
+    return seller_instance
+
+
+import csv
+from django.shortcuts import get_object_or_404
+from .models import Product, ImagesProduct, Category, Seller
+from applications.accounts.models import User
+
+# ...
+
+# Define la función process_csv aquí
+def process_csv(csv_file, seller_instance):
+    decoded_file = csv_file.read().decode('utf-8').splitlines()
+    csv_reader = csv.reader(decoded_file)
+    for row in csv_reader:
+        name_product, description_product, price_product, quantity_product, code_product, category_name = row
+
+        # Crear una instancia de Product
+        product = Product.objects.create(
+            name_product=name_product,
+            description_product=description_product,
+            price_product=price_product,
+            quantity_product=quantity_product,
+            code_product=code_product,
+            distributed_by_product=seller_instance
+        )
+
+        # Crear una instancia de ImagesProduct por defecto si no hay imágenes
+        if not product.image_product.exists():
+            default_image = ImagesProduct.objects.create(images_product='default_image.jpg')
+            product.image_product.add(default_image)
+
+        # Crear una instancia de Category si no existe
+        category, created = Category.objects.get_or_create(name_category=category_name)
+        product.categories_product.add(category)
+
+# ...
+
+# En tu vista principal
+def tu_vista(request):
+    if request.method == 'POST':
+        form = TuFormulario(request.POST, request.FILES)
+
+        # Resto del código para procesar el formulario
+        if form.is_valid():
+            # Obtener la instancia de Seller asociada al usuario actual
+            seller_instance = obtener_instancia_seller(request.user)
+
+            # Guardar el formulario y obtener la instancia de Product
+            product = form.save(commit=False)
+
+            # Asignar la instancia de Seller al producto
+            product.distributed_by_product = seller_instance
+
+            # Guardar el producto en la base de datos
+            product.save()
+
+            # Procesar el archivo CSV si se proporciona
+            csv_file = request.FILES.get('csv_file')
+            if csv_file:
+                # Pasar la instancia de Seller a process_csv
+                process_csv(csv_file, seller_instance)
+
+            # Resto del código si es necesario
+    else:
+        form = TuFormulario()
+
+    return render(request, 'tu_template.html', {'form': form})
