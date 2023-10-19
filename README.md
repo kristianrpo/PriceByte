@@ -21,11 +21,16 @@ Breve descripción del proyecto y su propósito.<br/>
 ```python --version```<br/>
 This should display the installed Python version, confirming a successful installation.<br/>
 
-### Clone the github repository: <br/>
+### Fork the original github repository
+- Open ```https://github.com/kristianrpo/PriceByte```
+- Click on "Fork"
+A local copy of the PriceByte project should have been created in your github account
+
+### Clone your github repository: <br/>
 -Open your web browser and go to https://github.com.<br/>
 -Log in to your GitHub account if you haven't already.<br/>
 -Into the Command Prompt or Powershell run:<br/>
-``` git clone https://github.com/kristianrpo/PriceByte.git```<br/>
+``` git clone 'link_repository'```<br/>
 
 ### Install requirements.txt of the proyect:<br/>
 -Open a terminal or command prompt and navigate to the root directory of the project.<br/>
