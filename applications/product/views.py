@@ -18,9 +18,15 @@ from .forms import form_favorite, TuFormulario
 from django.shortcuts import get_object_or_404
 from applications.accounts.models import User
 from applications.seller.models import Seller
+from django.shortcuts import redirect
 
 class SearchProducts(TemplateView):
     template_name = "product/search_product.html"
+
+    def get(self, request, *args, **kwargs):
+        # Redirige a 'product/recommendations/' cuando se accede a 'product/'
+        return redirect('product_app:product_recommendations')
+
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         if hasattr(self.request.user, 'type'):
@@ -464,6 +470,240 @@ class Favorites(ListView):
             context['is_seller'] = "No"
 
         return context
+    
+from collections import defaultdict
+
+
+class Recomendations(ListView):
+    model = Favorite, Product
+    template_name = "product/search_product.html"
+    context_object_name = "product"
+    paginate_by = 4
+
+    def get_queryset(self):
+
+        if self.request.user.is_authenticated:
+            list_products1 = Favorite.objects.filter(user=self.request.user)
+
+            if list_products1.exists():
+                lista_nombres = []
+
+                for product in list_products1:
+                    lista_nombres.append(product.product.name_product)
+
+                if lista_nombres:  
+                    list_products = Product.objects.filter(name_product__in=lista_nombres)
+            
+
+            
+                    if list_products.exists():
+                        unique_categories = set() 
+                        category_count = defaultdict(int)
+                        selected_products = []
+
+                        for product in list_products:
+                            categories_of_product = product.categories_product.all()
+                            unique_categories.update(categories_of_product)
+
+                        
+                        for category in unique_categories:
+                            print(category.name_category)
+
+                        filtered_products = Product.objects.filter(categories_product__in=unique_categories).distinct()
+
+                        print("----------3-------------")
+            
+                        weight_price = 0.5
+                        weight_rating = 0.7
+                        filtered_products = filtered_products.annotate(
+                        avg_price_rating=Avg('productrating__price_rating'),
+                        avg_quality_rating=Avg('productrating__quality_rating'),
+                        avg_warranty_rating=Avg('productrating__warranty_rating')
+                        )
+                        filtered_products = filtered_products.annotate(
+                            total_avg_rating=(F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
+                        )
+                        filtered_products = filtered_products.annotate(
+                            recommendation_pricebyte = ((F('total_avg_rating'))*weight_rating)/(F('price_product')*weight_price)
+                        )
+
+                        for product in filtered_products:
+                            print(f"Product: {product.name_product}, Categories: {[category.name_category for category in product.categories_product.all()]}")
+
+                        for product in filtered_products:
+                            categories_of_product = product.categories_product.all()
+
+                            if (
+                                category_count[product.categories_product.first().id] < 2
+                                and product not in list_products
+                            ):
+                                selected_products.append(product)
+                                category_count[product.categories_product.first().id] += 1
+
+                        
+                        print("------------4--------------")
+
+                        lista_names =[]
+                        for product in selected_products:
+                            lista_names.append(product.name_product)
+                        
+                    
+                        list_products_recomended = Product.objects.filter(name_product__in=lista_names)
+                        
+
+                
+
+                        list_products_recomended = list_products_recomended.annotate(
+                            avg_price_rating=Avg('productrating__price_rating'),
+                            avg_quality_rating=Avg('productrating__quality_rating'),
+                            avg_warranty_rating=Avg('productrating__warranty_rating')
+                            )
+                        list_products_recomended = list_products_recomended.annotate(
+                            total_avg_rating=(F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
+                        )
+                        
+                        for product in list_products_recomended:
+                            if product.avg_price_rating is not None and product.avg_quality_rating is not None and product.avg_warranty_rating is not None:
+                                product.avg_price_rating = round(product.avg_price_rating, 1)
+                                product.avg_quality_rating = round(product.avg_quality_rating, 1)
+                                product.avg_warranty_rating = round(product.avg_warranty_rating, 1)
+                                product.total_avg_rating = round(product.total_avg_rating, 1)
+                            else:
+                                product.total_avg_rating = "Sin reseñas"
+                        
+
+                        print(list_products_recomended)
+                        print(list_products)
+
+                        for product in list_products_recomended:
+                            print(f"Product: {product.name_product}, Categories: {[category.name_category for category in product.categories_product.all()]}")
+                        
+                        return list_products_recomended
+
+        
+        return []
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        print(f'Contexto: {context}')
+
+        option = self.request.GET.get("option", '')
+        context['search_by'] = option
+
+        if self.request.user.is_authenticated:
+            list_products1 = Favorite.objects.filter(user=self.request.user)
+
+            if list_products1.exists():
+                lista_nombres = []
+
+                for product in list_products1:
+                    lista_nombres.append(product.product.name_product)
+
+                if lista_nombres:  
+                    list_products = Product.objects.filter(name_product__in=lista_nombres)
+            
+
+            
+                    if list_products.exists():
+                        unique_categories = set() 
+                        category_count = defaultdict(int)
+                        selected_products = []
+
+                        for product in list_products:
+                            categories_of_product = product.categories_product.all()
+                            unique_categories.update(categories_of_product)
+
+                        
+                        for category in unique_categories:
+                            print(category.name_category)
+
+                        filtered_products = Product.objects.filter(categories_product__in=unique_categories).distinct()
+
+                        print("----------3-------------")
+            
+                        weight_price = 0.5
+                        weight_rating = 0.7
+                        filtered_products = filtered_products.annotate(
+                        avg_price_rating=Avg('productrating__price_rating'),
+                        avg_quality_rating=Avg('productrating__quality_rating'),
+                        avg_warranty_rating=Avg('productrating__warranty_rating')
+                        )
+                        filtered_products = filtered_products.annotate(
+                            total_avg_rating=(F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
+                        )
+                        filtered_products = filtered_products.annotate(
+                            recommendation_pricebyte = ((F('total_avg_rating'))*weight_rating)/(F('price_product')*weight_price)
+                        )
+
+                        for product in filtered_products:
+                            print(f"Product: {product.name_product}, Categories: {[category.name_category for category in product.categories_product.all()]}")
+
+                        for product in filtered_products:
+                            categories_of_product = product.categories_product.all()
+
+                            if (
+                                category_count[product.categories_product.first().id] < 2
+                                and product not in list_products
+                            ):
+                                selected_products.append(product)
+                                category_count[product.categories_product.first().id] += 1
+
+                        
+                        print("------------4--------------")
+
+                        lista_names =[]
+                        for product in selected_products:
+                            lista_names.append(product.name_product)
+                        
+                    
+                        list_products_recomended = Product.objects.filter(name_product__in=lista_names)
+                        
+
+                
+
+                        list_products_recomended = list_products_recomended.annotate(
+                            avg_price_rating=Avg('productrating__price_rating'),
+                            avg_quality_rating=Avg('productrating__quality_rating'),
+                            avg_warranty_rating=Avg('productrating__warranty_rating')
+                            )
+                        list_products_recomended = list_products_recomended.annotate(
+                            total_avg_rating=(F('avg_price_rating') + F('avg_quality_rating') + F('avg_warranty_rating')) / 3
+                        )
+                        
+                        for product in list_products_recomended:
+                            if product.avg_price_rating is not None and product.avg_quality_rating is not None and product.avg_warranty_rating is not None:
+                                product.avg_price_rating = round(product.avg_price_rating, 1)
+                                product.avg_quality_rating = round(product.avg_quality_rating, 1)
+                                product.avg_warranty_rating = round(product.avg_warranty_rating, 1)
+                                product.total_avg_rating = round(product.total_avg_rating, 1)
+                            else:
+                                product.total_avg_rating = "Sin reseñas"
+                        
+
+                        print(list_products_recomended)
+                        print(list_products)
+
+                        for product in list_products_recomended:
+                            print(f"Product: {product.name_product}, Categories: {[category.name_category for category in product.categories_product.all()]}")
+                        
+                        context["average_products"] = list_products_recomended
+
+                        if hasattr(self.request.user, 'type'):
+                            context['is_seller'] = "Si" if self.request.user.type == "vendedor" else "No"
+                        else:
+                            context['is_seller'] = "No"
+
+                        return context
+
+        if hasattr(self.request.user, 'type'):
+            context['is_seller'] = "Si" if self.request.user.type == "vendedor" else "No"
+        else:
+            context['is_seller'] = "No"
+
+        return context
+    
 def obtener_instancia_seller(usuario_actual):
     
     usuario_seller = get_object_or_404(User, pk=usuario_actual.pk)
