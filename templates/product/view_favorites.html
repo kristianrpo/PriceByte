@@ -2,10 +2,11 @@
 {% load static %}
 {% block settings_head %}
 <title>Todos los productos</title>
-<link rel = "stylesheet" href = "{%static 'css/product/view_all_products.css'%}"/>
+<link rel = "stylesheet" href = "{%static 'css/product/favorites.css'%}"/>
 {% endblock settings_head %}
 {%block content%}
 {% include 'components/nav_bar.html' with value_type=is_seller%}
+<br/>
 <div class = "global_container">
     <div class = "title">
         <h1> TUS PRODUCTOS FAVORITOS</span></h1>

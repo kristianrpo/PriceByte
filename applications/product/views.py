@@ -478,7 +478,7 @@ class Recomendations(ListView):
     model = Favorite, Product
     template_name = "product/search_product.html"
     context_object_name = "product"
-    paginate_by = 4
+    paginate_by = 2
 
     def get_queryset(self):
 
