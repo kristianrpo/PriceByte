@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block settings_head %}
-<title>Login</title>
+<title>Sign up</title>
 <link rel="stylesheet" type="text/css" href="{% static 'css/accounts/accounts.css' %}">
 {% endblock settings_head %}
 {% block content %}
@@ -9,9 +9,8 @@
 <div class="centered-container">
   <div class="card">
     <div class="card-body">
-    </br></br>
       <h2 class="card-title centered-title">Registrarse</h2>
-    </br>
+      <br/>
       {% if error %}
       <div class="alert" role="alert">
         {{ error }}
@@ -44,7 +43,6 @@
           <button type="submit" class="button_details">Registrarse</button>
         </form>
       </p>
-    </br>
     </div>
   </div>
 </div>

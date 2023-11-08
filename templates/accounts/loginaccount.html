@@ -3,22 +3,23 @@
 {%extends 'base.html'%}
 {%load static%}
 {% block settings_head%}
-<title>Añadir producto</title>
+<title>Login</title>
 <link href = "{%static 'css/accounts/login.css'%}" rel = "stylesheet"/>
 {%endblock settings_head%}
 {% block content%}
 {% include 'components/nav_bar.html' with value_type=is_seller%}
 <div class = "general_container">
 </br>
-<h2 class="card-title centered-title">Iniciar sesión</h2></br>
+<div class = "centered">
+  <h2 class="card-title centered-title">Iniciar sesión</h2></br>
     <form method = "POST" enctype="multipart/form-data"> {% csrf_token %}
       <label>Nombre de usuario</label>{{ form.username }}
       <label>Contraseña</label>{{ form.password }}
         <button type="submit" class = "button_details" >Iniciar sesión</button>
     </form>
   </br></br>
+  </div>
 </div>
-</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 {% include 'components/footer.html'%}
 <script src = "{% static 'js/seller/upload_files.js'%}">
 </script>
