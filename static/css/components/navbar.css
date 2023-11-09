@@ -22,7 +22,7 @@
 .container .buttons_container>a{
     border:none;
     box-shadow: 0px 1vh 0.8vw rgba(0, 0, 0, 0.1);
-    background-color: transparent;
+    background-color: white;
     border-radius: 1vw;
     margin:0vw 1vw;
     padding:1vw;
@@ -63,7 +63,7 @@
 .container .buttons_container>a{
     border:none;
     box-shadow: 0px 1vh 0.8vw rgba(0, 0, 0, 0.1);
-    background-color: transparent;
+    background-color: white;
     border-radius: 1vw;
     margin:3vw 1vw;
     padding:1vw;

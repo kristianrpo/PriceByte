@@ -12,8 +12,8 @@
             <a href = "{%url 'product_app:search_product'%}">Productos</a>
             
             {% if user.is_authenticated %}
-                <a class="nav-link" href="{% url 'logoutaccount' %}">Logout ({{ user.username }} / {{ user.type }})</a>
                 <a href = "{%url 'product_app:See_favorites'%}">Productos Favoritos</a>
+                <a class="nav-link" href="{% url 'logoutaccount' %}">Cerrar sesión ({{ user.username }} / {{ user.type }})</a>
             {% else %}
                 <a href = "{% url 'loginaccount' %}">Iniciar Sesión</a>
                 <a href = "{% url 'signupaccount' %}">Registrarse</a>
