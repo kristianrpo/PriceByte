@@ -1,7 +1,6 @@
 # PRICEBYTE
 
 PRICEBYTE is a sophisticated online marketplace that empowers users to easily search for, filter, and review various products. This platform utilizes advanced natural language processing and recommendation systems to understand product descriptions, recognize related products, and facilitate user interaction through comments and reviews.
-Breve descripción del proyecto y su propósito.<br/>
 
 
 ## Requisites 
