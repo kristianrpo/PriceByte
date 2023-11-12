@@ -323,7 +323,7 @@ def price_products(request, vendor_name):
 
     df = pd.DataFrame(list(product_avg_ratings.items()), columns=['Nombre del Producto', 'Calificación Promedio'])
 
-    plt.style.use('seaborn-darkgrid')
+    sns.set_style('darkgrid')
     plt.figure(figsize=(10, 4))  
 
     ax = plt.subplot(111, frame_on=False)
