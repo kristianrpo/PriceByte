@@ -16,6 +16,9 @@ import seaborn as sns
 import matplotlib
 matplotlib.use('Agg')
 
+
+sns.set(style="darkgrid")
+
 def generate_category_chart(vendor):
     products_of_vendor = Product.objects.filter(distributed_by_product=vendor)
 
