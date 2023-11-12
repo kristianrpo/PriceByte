@@ -11,7 +11,8 @@ from applications.review.models import ProductRating
 from django.utils.safestring import mark_safe
 from django.db.models import Avg
 import math 
-
+import matplotlib.pyplot as plt
+import seaborn as sns
 import matplotlib
 matplotlib.use('Agg')
 
