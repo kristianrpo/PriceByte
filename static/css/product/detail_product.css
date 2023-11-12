@@ -28,7 +28,7 @@
 .general_container {
   display: flex;
   justify-content: center;
-  height: 90vh;
+  height: 100%;
 }
 .general_container .info_container {
   margin-top: 12vh;
