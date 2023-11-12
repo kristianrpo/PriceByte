@@ -1,5 +1,4 @@
 from typing import Any, Dict
-import csv
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView,TemplateView, CreateView
@@ -19,6 +18,12 @@ from django.shortcuts import get_object_or_404
 from applications.accounts.models import User
 from applications.seller.models import Seller
 from django.shortcuts import redirect
+import csv
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from .models import Product, ImagesProduct, Category, Seller
+from django.urls import reverse
+from django.templatetags.static import static
 
 class SearchProducts(TemplateView):
     template_name = "product/search_product.html"
@@ -712,69 +717,53 @@ def obtener_instancia_seller(usuario_actual):
 
     return seller_instance
 
-
 import csv
-from django.shortcuts import get_object_or_404
-from .models import Product, ImagesProduct, Category, Seller
-from applications.accounts.models import User
+from django.shortcuts import render, HttpResponseRedirect, reverse
+from .models import Seller, Product, ImagesProduct
 
-# ...
+def upload_csv(request):
+    if request.method == 'POST' and 'csv_file' in request.FILES:
+        csv_file = request.FILES['csv_file']
 
-# Define la función process_csv aquí
-def process_csv(csv_file, seller_instance):
-    decoded_file = csv_file.read().decode('utf-8').splitlines()
-    csv_reader = csv.reader(decoded_file)
-    for row in csv_reader:
-        name_product, description_product, price_product, quantity_product, code_product, category_name = row
+        try:
+    
+            decoded_file = csv_file.read().decode('utf-8', errors='replace')
 
-        # Crear una instancia de Product
-        product = Product.objects.create(
-            name_product=name_product,
-            description_product=description_product,
-            price_product=price_product,
-            quantity_product=quantity_product,
-            code_product=code_product,
-            distributed_by_product=seller_instance
-        )
+        
+            csv_reader = csv.DictReader(decoded_file.splitlines())
 
-        # Crear una instancia de ImagesProduct por defecto si no hay imágenes
-        if not product.image_product.exists():
-            default_image = ImagesProduct.objects.create(images_product='default_image.jpg')
-            product.image_product.add(default_image)
+            default_image = ImagesProduct.objects.create(images_product = static('img/default-no-image-1.png'))
+            default_category = None
 
-        # Crear una instancia de Category si no existe
-        category, created = Category.objects.get_or_create(name_category=category_name)
-        product.categories_product.add(category)
+            for row in csv_reader:
+       
+                code = row.get('Código', '')  
 
-# ...
+                seller, created = Seller.objects.get_or_create(NIT_seller=row['NIT_seller'],
+                                                               defaults={
+                                                                   'name_company_seller': row['name_company_seller'],
+                                                                   'email_seller': row['email_seller'],
+                                                                   'phone_number_seller': row['phone_number_seller'],
+                                                                   'address': row['address'],
+                                                                   'local_number_seller': row['local_number_seller']
+                                                               })
 
-# En tu vista principal
-def tu_vista(request):
-    if request.method == 'POST':
-        form = TuFormulario(request.POST, request.FILES)
+                product = Product.objects.create(
+                    name_product=row['Nombre'],
+                    description_product=row.get('Descripción', ''),  
+                    distributed_by_product=seller,
+                    price_product=row['Precio'],
+                    quantity_product=row['Cantidad'],
+                    code_product=code
+                )
 
-        # Resto del código para procesar el formulario
-        if form.is_valid():
-            # Obtener la instancia de Seller asociada al usuario actual
-            seller_instance = obtener_instancia_seller(request.user)
+                product.image_product.add(default_image)
+                product.categories_product.add(default_category)
 
-            # Guardar el formulario y obtener la instancia de Product
-            product = form.save(commit=False)
+            return HttpResponseRedirect(reverse('seller_app:home_seller'))
 
-            # Asignar la instancia de Seller al producto
-            product.distributed_by_product = seller_instance
+        except UnicodeDecodeError as e:
+            return render(request, 'product/upload_csv.html', {'error_message': str(e)})
 
-            # Guardar el producto en la base de datos
-            product.save()
+    return render(request, 'product/upload_csv.html')
 
-            # Procesar el archivo CSV si se proporciona
-            csv_file = request.FILES.get('csv_file')
-            if csv_file:
-                # Pasar la instancia de Seller a process_csv
-                process_csv(csv_file, seller_instance)
-
-            # Resto del código si es necesario
-    else:
-        form = TuFormulario()
-
-    return render(request, 'tu_template.html', {'form': form})

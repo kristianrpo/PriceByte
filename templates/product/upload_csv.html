@@ -1,0 +1,11 @@
+<!-- upload_csv.html -->
+{% if success_message %}
+  <p>{{ success_message }}</p>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="csv_file">Selecciona un archivo CSV:</label>
+    <input type="file" name="csv_file" accept=".csv" required>
+    <button type="submit">Cargar CSV</button>
+</form>

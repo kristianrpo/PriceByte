@@ -103,14 +103,16 @@
         </ul>
     </div>
     <br/>
-    <a href = "{% url 'seller_app:create_product'%}" class = "button_details">Crear producto</a>
-    <label for="csv_file" class = "button_details">Subir archivo CSV</label>
-    <input type="file" id="csv_file" name="csv_file" accept=".csv" style="display: none;">
+    <form method="post" enctype="multipart/form-data" action="{% url 'product_app:upload_csv' %}">
+        {% csrf_token %}
+        <input type="file" name="csv_file" class="button_details">  
+        <button type="submit" class="button_details" id="uploadCsvBtn">Cargar CSV</button>
+    </form>
+    
+    </form>
 </div>
 
-
-
-{% include 'components/footer.html'%}
+{% include 'components/footer.html' %}
 <script>
     var productDivs = document.querySelectorAll('.product_image');
 
@@ -123,5 +125,30 @@
             window.location.href = url;
         });
     });
+    document.addEventListener('DOMContentLoaded', function () {
+        var productDivs = document.querySelectorAll('.product_image');
+
+        productDivs.forEach(function (div) {
+            div.addEventListener('click', function () {
+                var productId = div.getAttribute('data-product-id');
+                var url = "{% url 'product_app:detail_product' 0 %}".replace("0", productId);
+                window.location.href = url;
+            });
+        });
+
+        // Llamada a la función cuando se hace clic en el botón
+        var uploadCsvBtn = document.getElementById('uploadCsvBtn');
+        if (uploadCsvBtn) {
+            uploadCsvBtn.addEventListener('click', function () {
+                // Llamada a la función aquí
+                alert('Función de carga de CSV ejecutada');
+            });
+        }
+    });
 </script>
-{% endblock content%}
+{% endblock content %}
+
+
+
+
+
