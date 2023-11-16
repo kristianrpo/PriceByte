@@ -208,7 +208,7 @@ def quality_products(request, vendor_name):
 
     df = pd.DataFrame(list(product_avg_ratings.items()), columns=['Nombre del Producto', 'Calificación Promedio'])
 
-    sns.set_style('darkgrid')
+    plt.style.use('seaborn-darkgrid')
     plt.figure(figsize=(10, 4))  
 
     ax = plt.subplot(111, frame_on=False)
@@ -266,7 +266,7 @@ def warranty_products(request, vendor_name):
 
     df = pd.DataFrame(list(product_avg_ratings.items()), columns=['Nombre del Producto', 'Calificación Promedio'])
 
-    sns.set_style('darkgrid')
+    plt.style.use('seaborn-darkgrid')
     plt.figure(figsize=(10, 4))  
 
     ax = plt.subplot(111, frame_on=False)

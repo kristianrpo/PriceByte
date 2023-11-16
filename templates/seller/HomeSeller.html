@@ -103,10 +103,11 @@
         </ul>
     </div>
     <br/>
+    <a href = "{% url 'seller_app:create_product'%}" class = "button_details">Crear producto</a>
     <form method="post" enctype="multipart/form-data" action="{% url 'product_app:upload_csv' %}">
         {% csrf_token %}
-        <input type="file" name="csv_file" class="button_details">  
-        <button type="submit" class="button_details" id="uploadCsvBtn">Cargar CSV</button>
+        <input type="file" name="csv_file" class="button_imgs">  
+        <button type="submit" class="button_imgs" id="uploadCsvBtn">Cargar CSV</button>
     </form>
     
     </form>
